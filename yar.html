@@ -92,12 +92,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .filter-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:52px;}
 
 /* step labels + arrows */
-.filter-steps{display:flex;flex-direction:column;gap:0;}
-.filter-step{position:relative;}
-.filter-step-header{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
-.step-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
-.step-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;}
-.step-arrow{display:flex;align-items:center;justify-content:center;height:36px;padding:0 48px;color:var(--faint);font-size:18px;letter-spacing:.1em;}
 
 /* filter UI */
 .fui{border:.5px solid var(--border);border-radius:2px;overflow:hidden;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.05);}
@@ -209,7 +203,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .cms-grid{grid-template-columns:1fr;}
   .next{grid-template-columns:1fr;padding:40px 20px;gap:16px;}
   .next-link{font-size:clamp(28px,8vw,44px);}
-  .step-arrow{padding:0 20px;}
 }
 @media(max-width:480px){
   .stats{grid-template-columns:1fr;}
@@ -311,88 +304,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <p class="filter-demo-caption">Filter selected → chip appears → results narrow instantly — no page reload</p>
   </div>
 
-  <div class="filter-steps">
-
-    <!-- Step 1 -->
-    <div class="filter-step reveal">
-      <div class="filter-step-header">
-        <span class="step-num">Step 01</span>
-        <span class="step-title">Default view — all companies visible</span>
-      </div>
-      <div class="fui">
-        <div class="fui-bar">
-          <span class="fui-f">Stage ≡</span>
-          <span class="fui-f">Vertical ≡</span>
-          <span class="fui-f">HQ ≡</span>
-          <div class="fui-search">Search companies...</div>
-        </div>
-        <div class="fui-chips">
-          <span class="fui-chip-label">Active Filters:</span>
-          <span class="fui-chip">Clear all</span>
-        </div>
-        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-        <div class="fui-row"><span class="fui-co">Afforai</span><span class="fui-desc">AI-powered workspace for citation-backed research and literature reviews</span><span class="fui-badge">Pre-seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">Austin</span></div>
-        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-        <div class="fui-row"><span class="fui-co">CarIQ Pay</span><span class="fui-desc">Digital payments for fuel and toll — single ledger, real-time vehicle data</span><span class="fui-badge">Series B</span><span class="fui-badge">Fintech</span><span class="fui-badge">San Francisco</span></div>
-      </div>
-    </div>
-
-    <div class="step-arrow reveal">↓</div>
-
-    <!-- Step 2 -->
-    <div class="filter-step reveal">
-      <div class="filter-step-header">
-        <span class="step-num">Step 02</span>
-        <span class="step-title">Stage filter applied → chip appears instantly</span>
-      </div>
-      <div class="fui">
-        <div class="fui-bar">
-          <span class="fui-f fui-f-active">Stage —</span>
-          <span class="fui-f">Vertical ≡</span>
-          <span class="fui-f">HQ ≡</span>
-          <div class="fui-search">Search companies...</div>
-        </div>
-        <div class="fui-pills">
-          <span class="fui-pill">Series D</span><span class="fui-pill">Series C</span><span class="fui-pill">Series A</span><span class="fui-pill">Series B</span><span class="fui-pill fui-pill-on">Series Seed</span><span class="fui-pill">Pre-seed</span>
-        </div>
-        <div class="fui-chips">
-          <span class="fui-chip-label">Active Filters:</span>
-          <span class="fui-chip fui-chip-on">Series Seed ×</span>
-          <span class="fui-chip">Clear all</span>
-        </div>
-        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-        <div class="fui-row"><span class="fui-co">Charactr</span><span class="fui-desc">AI-powered video at scale — unlimited content with AI twins and synthetic avatars</span><span class="fui-badge">Series Seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">San Francisco</span></div>
-      </div>
-    </div>
-
-    <div class="step-arrow reveal">↓</div>
-
-    <!-- Step 3 -->
-    <div class="filter-step reveal">
-      <div class="filter-step-header">
-        <span class="step-num">Step 03</span>
-        <span class="step-title">Live search layered on top → results narrowed in real time</span>
-      </div>
-      <div class="fui">
-        <div class="fui-bar">
-          <span class="fui-f fui-f-active">Stage ×</span>
-          <span class="fui-f">Vertical ≡</span>
-          <span class="fui-f">HQ ≡</span>
-          <div class="fui-search fui-search-on">AI</div>
-        </div>
-        <div class="fui-chips">
-          <span class="fui-chip-label">Active Filters:</span>
-          <span class="fui-chip fui-chip-on">Series Seed ×</span>
-          <span class="fui-chip fui-chip-on">AI ×</span>
-          <span class="fui-chip">Clear all</span>
-        </div>
-        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-        <div class="fui-empty">1 result — 37 companies filtered out</div>
-      </div>
-    </div>
-  </div>
 
   <!-- STATS — punchy -->
   <div class="stats reveal">

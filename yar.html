@@ -119,21 +119,88 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:fl
 </div>
 
 <div class="proj-section reveal">
-  <p class="proj-section-label">Multi-filter System</p>
+  <p class="proj-section-label">Search & Filter</p>
   <div class="proj-section-body">
-    <p>The portfolio page is the most technically demanding element. Investors filter <strong>38+ companies in real time</strong> across three dimensions simultaneously — with active filter chips, a clear-all button, and a graceful empty state.</p>
-    <div class="highlight-list">
-      <div class="highlight-item"><strong>Stage</strong> — Pre-seed through Series D</div>
-      <div class="highlight-item"><strong>Vertical</strong> — 14 categories: Generative AI, Fintech, Biotech, Robotics, and more</div>
-      <div class="highlight-item"><strong>HQ</strong> — across 10+ states and countries</div>
-    </div>
-    <p style="margin-top:14px;">Built with Webflow CMS multi-reference fields and Finsweet CMS Filter — a product-grade filtering experience rarely seen in Webflow portfolio builds.</p>
+    <p>The portfolio page is the most technically demanding part of the site. Investors can <strong>filter and search 38+ companies in real time</strong> — combining three dropdown filters with a live text search, all applied simultaneously.</p>
+
+    <!-- Screenshot 1: default state (from user upload) -->
     <div class="proj-img-block">
-      <img src="https://screenshots.webflow.com/sites/6930c937a407b45d98f3ecc8/20260416221555_61e4595586c804a1927964f071c876c1.png" alt="Yar portfolio filter system">
-      <p class="proj-img-caption">Portfolio page — 3-axis filter with active state chips</p>
+      <img src="yar-filter-1.png" alt="Yar portfolio — Stage, Vertical, HQ filters with search bar">
+      <p class="proj-img-caption">Default state — Stage / Vertical / HQ dropdowns + search bar, table view</p>
+    </div>
+
+    <!-- Screenshot 2: Stage dropdown open, Series Seed selected -->
+    <div class="proj-img-block" style="margin-top:20px;">
+      <div class="fui-shot">
+        <div class="fui-shot-bar">
+          <span class="fui-shot-filter fui-active-f">Stage —</span>
+          <span class="fui-shot-filter">Vertical ≡</span>
+          <span class="fui-shot-filter">HQ ≡</span>
+          <div class="fui-shot-search">Search...</div>
+        </div>
+        <div class="fui-shot-pills">
+          <span>Series D</span><span>Series C</span><span>Series A</span><span>Series B</span><span class="fui-pill-selected">Series Seed</span><span>Pre-seed</span>
+        </div>
+        <div class="fui-shot-active"><span class="fui-shot-chip fui-empty-chip">Active Filters:</span><span class="fui-shot-chip fui-on-chip">Series Seed ×</span><span class="fui-shot-chip">Clear all</span></div>
+        <div class="fui-shot-thead"><span>Company Name</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
+        <div class="fui-shot-row"><strong>BitHuman</strong><span>AI-driven digital human platform enabling realistic, interactive virtual avatars for enterprise applications.</span><span>Series Seed</span><span>Generative AI</span><span>San Francisco</span></div>
+      </div>
+      <p class="proj-img-caption">Stage dropdown open — "Series Seed" selected (highlighted), active filter chip appears instantly, results update in real time</p>
+    </div>
+
+    <!-- Screenshot 3: Stage + Search active simultaneously -->
+    <div class="proj-img-block" style="margin-top:20px;">
+      <div class="fui-shot">
+        <div class="fui-shot-bar">
+          <span class="fui-shot-filter fui-active-f">Stage ×</span>
+          <span class="fui-shot-filter">Vertical ≡</span>
+          <span class="fui-shot-filter">HQ ≡</span>
+          <div class="fui-shot-search fui-search-on">AI</div>
+        </div>
+        <div class="fui-shot-active">
+          <span class="fui-shot-chip fui-empty-chip">Active Filters:</span>
+          <span class="fui-shot-chip fui-on-chip">Series Seed ×</span>
+          <span class="fui-shot-chip fui-on-chip">AI ×</span>
+          <span class="fui-shot-chip">Clear all</span>
+        </div>
+        <div class="fui-shot-thead"><span>Company Name</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
+        <div class="fui-shot-row"><strong>BitHuman</strong><span>AI-driven digital human platform enabling realistic, interactive virtual avatars for enterprise applications.</span><span>Series Seed</span><span>Generative AI</span><span>San Francisco</span></div>
+        <div class="fui-shot-empty-hint">1 result — all other companies filtered out</div>
+      </div>
+      <p class="proj-img-caption">Multi-filter active — "Series Seed" + "AI" search combined, two active chips, one result remaining</p>
+    </div>
+
+    <div class="highlight-list" style="margin-top:24px;">
+      <div class="highlight-item"><strong>3 dropdown filters</strong> — Stage (Pre-seed → Series D), Vertical (14 categories), HQ (10+ locations)</div>
+      <div class="highlight-item"><strong>Live search bar</strong> — searches company names and descriptions simultaneously alongside dropdown filters</div>
+      <div class="highlight-item"><strong>Active filter chips</strong> — each selection shown as a removable tag below the filter bar</div>
+      <div class="highlight-item"><strong>Vertical pill selector</strong> — expands inline showing all 14 category pills (HealthTech, Generative AI, Fintech, Robotic AI…)</div>
+      <div class="highlight-item"><strong>Clear all</strong> — one click resets all active filters and search instantly</div>
+      <div class="highlight-item"><strong>Built with</strong> — Webflow CMS multi-reference fields + Finsweet CMS Filter</div>
     </div>
   </div>
 </div>
+
+<style>
+.fui-shot{border:.5px solid var(--border);border-radius:2px;overflow:hidden;background:#fff;max-width:580px;margin-top:4px;}
+.fui-shot-bar{display:flex;align-items:center;gap:28px;padding:12px 20px;border-bottom:.5px solid var(--border);}
+.fui-shot-filter{font-size:11px;color:var(--ink);}
+.fui-active-f{font-weight:400;}
+.fui-shot-search{margin-left:auto;font-size:11px;color:var(--faint);border:.5px solid var(--border);border-radius:20px;padding:5px 14px;min-width:140px;}
+.fui-search-on{color:var(--ink);border-color:var(--navy);}
+.fui-shot-pills{display:flex;gap:6px;flex-wrap:wrap;padding:10px 20px;background:var(--bg2);border-bottom:.5px solid var(--border);}
+.fui-shot-pills span{font-size:9px;letter-spacing:.06em;border:.5px solid var(--border);border-radius:20px;padding:4px 10px;color:var(--muted);}
+.fui-shot-active{display:flex;align-items:center;gap:8px;padding:10px 20px;border-bottom:.5px solid var(--border);flex-wrap:wrap;}
+.fui-shot-chip{font-size:9px;letter-spacing:.06em;border:.5px solid var(--border);border-radius:20px;padding:4px 10px;color:var(--muted);}
+.fui-empty-chip{border:none;padding-left:0;}
+.fui-on-chip{border-color:var(--ink);color:var(--ink);}
+.fui-shot-row{display:grid;grid-template-columns:110px 1fr 80px 100px 100px;gap:8px;padding:12px 20px;font-size:10px;color:var(--muted);align-items:start;}
+.fui-shot-row strong{font-weight:400;color:var(--ink);font-size:11px;}
+.fui-pill-selected{background:var(--ink);color:#fff;border-color:var(--ink);}
+.fui-shot-thead{display:grid;grid-template-columns:110px 1fr 80px 100px 100px;gap:8px;padding:8px 20px;background:var(--bg2);border-bottom:.5px solid var(--border);border-top:.5px solid var(--border);}
+.fui-shot-thead span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+.fui-shot-empty-hint{padding:8px 20px;font-size:10px;color:var(--faint);font-style:italic;border-top:.5px solid var(--border);}
+</style>
 
 <div class="proj-section reveal">
   <p class="proj-section-label">CMS Architecture</p>

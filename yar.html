@@ -9,7 +9,6 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --red:#8B2020;
-  --navy:#1a2e5e;
   --ink:#0c0c0c;
   --ink2:#2a2a2a;
   --muted:#5a5a5a;
@@ -22,183 +21,195 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
-#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.95);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
-.logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;letter-spacing:.01em;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.96);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
+.logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;}
 .logo em{font-style:italic;color:var(--red);}
-.nav-back{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .25s;}
+.nav-back{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back::before{content:'←';display:inline-block;transition:transform .2s;}
 .nav-back:hover{color:var(--ink);}
-.nav-back::before{content:'←';transition:transform .25s;}
-.nav-back:hover::before{transform:translateX(-3px);}
+.nav-back:hover::before{transform:translateX(-4px);}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:64px;position:relative;border-bottom:.5px solid var(--border);}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:48px;border-bottom:.5px solid var(--border);}
 .hero-left{display:flex;flex-direction:column;}
-.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:40px;opacity:0;animation:fadeUp .5s ease forwards .1s;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:36px;opacity:0;animation:fadeUp .5s ease forwards .1s;}
 .hero-num{font-size:10px;letter-spacing:.2em;color:var(--faint);}
-.hero-sep{width:28px;height:.5px;background:var(--border);}
+.hero-line{width:24px;height:.5px;background:var(--border);}
 .hero-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
 .hero-title{font-family:var(--serif);font-size:clamp(56px,8vw,120px);font-weight:300;line-height:.88;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
 .hero-title em{font-style:italic;color:var(--red);}
-.hero-tagline{margin-top:28px;font-size:16px;line-height:1.6;color:var(--ink2);max-width:440px;opacity:0;animation:fadeUp .7s ease forwards .4s;font-weight:400;}
-.hero-sub{margin-top:12px;font-family:var(--serif);font-size:clamp(15px,1.8vw,18px);font-style:italic;color:var(--muted);max-width:420px;line-height:1.6;opacity:0;animation:fadeUp .7s ease forwards .5s;}
-.hero-actions{margin-top:36px;display:flex;align-items:center;gap:24px;opacity:0;animation:fadeUp .6s ease forwards .65s;flex-wrap:wrap;}
-.hero-cta{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--ink);text-decoration:none;padding:13px 24px;transition:background .25s,gap .25s;}
-.hero-cta:hover{background:var(--red);gap:14px;}
-.hero-cta-arrow{font-size:14px;transition:transform .25s;}
+/* single merged subline */
+.hero-sub{margin-top:24px;font-size:15px;line-height:1.65;color:var(--ink2);max-width:420px;opacity:0;animation:fadeUp .7s ease forwards .4s;font-weight:400;}
+.hero-actions{margin-top:32px;opacity:0;animation:fadeUp .6s ease forwards .55s;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--ink);text-decoration:none;padding:14px 26px;transition:background .25s,gap .2s;}
+.hero-cta:hover{background:var(--red);gap:15px;}
+.hero-cta-arrow{font-size:13px;transition:transform .2s;}
 .hero-cta:hover .hero-cta-arrow{transform:translate(3px,-3px);}
-.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeUp .6s ease forwards .8s;}
-.hero-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:5px 10px;}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeUp .6s ease forwards .7s;}
+.hero-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:4px 9px;}
 
-/* HERO RIGHT — animated network */
-.hero-right{position:relative;height:400px;display:flex;align-items:center;justify-content:center;opacity:0;animation:fadeIn 1.2s ease forwards .5s;}
-.hero-canvas{width:100%;height:100%;}
+/* hero right — cursor-reactive dots */
+.hero-right{position:relative;height:420px;opacity:0;animation:fadeIn 1s ease forwards .6s;}
+#networkCanvas{width:100%;height:100%;display:block;}
 
-/* ── SUMMARY BAND ── */
-.summary{background:var(--ink);padding:56px 48px;display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start;}
-.summary-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);padding-top:4px;}
-.summary-main{display:flex;flex-direction:column;gap:24px;}
-.summary-lead{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:300;line-height:1.4;color:#fff;}
-.summary-lead em{font-style:italic;color:rgba(255,255,255,.6);}
-.summary-points{display:flex;flex-direction:column;gap:12px;}
-.summary-point{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.55);}
+/* ── SUMMARY ── */
+.summary{background:var(--ink);padding:56px 48px;display:grid;grid-template-columns:160px 1fr;gap:64px;align-items:start;}
+.summary-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);padding-top:4px;}
+.summary-right{display:flex;flex-direction:column;gap:20px;}
+.summary-lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,26px);font-weight:300;line-height:1.45;color:#fff;}
+.summary-lead em{font-style:italic;color:rgba(255,255,255,.5);}
+.summary-points{display:flex;flex-direction:column;gap:10px;}
+.summary-point{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.5);}
 .summary-point::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
-.summary-point strong{color:rgba(255,255,255,.85);font-weight:400;}
+.summary-point strong{color:rgba(255,255,255,.8);font-weight:400;}
 
 /* ── CHALLENGE / APPROACH / OUTCOME ── */
 .trio{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:.5px solid var(--border);}
-.trio-item{padding:48px;border-right:.5px solid var(--border);}
+.trio-item{padding:48px;border-right:.5px solid var(--border);transition:background .2s;}
+.trio-item:hover{background:var(--bg2);}
 .trio-item:last-child{border-right:none;}
-.trio-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
-.trio-title{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink);margin-bottom:14px;}
+.trio-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.trio-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--ink);margin-bottom:12px;}
 .trio-body{font-size:13px;line-height:1.85;color:var(--muted);}
 
-/* ── SECTIONS ── */
-.section{padding:72px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
-.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:80px;}
-.section-body{font-size:14px;line-height:1.9;color:var(--muted);}
-.section-body strong{color:var(--ink2);font-weight:500;}
-.section-body p+p{margin-top:16px;}
-.section-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:300;color:var(--ink);margin-bottom:16px;line-height:1.2;}
-.section-title em{font-style:italic;color:var(--red);}
+/* ── DESIGN TEXT BLOCK (no image) ── */
+.design-block{padding:56px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.design-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;}
+.design-body{}
+.design-heading{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:300;color:var(--ink);margin-bottom:14px;}
+.design-text{font-size:14px;line-height:1.75;color:var(--muted);max-width:540px;}
+.design-text+.design-text{margin-top:8px;}
 
-/* ── IMAGES ── */
-.img-block{margin-top:28px;max-width:600px;}
-.img-block img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);transition:transform .4s ease,box-shadow .4s ease;}
-.img-block img:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.1);}
-.img-caption{margin-top:10px;font-size:10px;letter-spacing:.08em;color:var(--faint);line-height:1.5;}
-
-/* ── HIGHLIGHT LIST ── */
-.hlist{margin-top:20px;display:flex;flex-direction:column;gap:12px;}
-.hitem{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.65;color:var(--muted);}
-.hitem::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
-.hitem strong{color:var(--ink2);font-weight:500;}
-
-/* ── FILTER HERO SECTION ── */
-.filter-hero{background:var(--bg2);padding:72px 48px;border-bottom:.5px solid var(--border);}
-.filter-hero-inner{max-width:960px;}
+/* ── FILTER SECTION ── */
+.filter-section{padding:72px 48px;border-bottom:.5px solid var(--border);background:var(--bg2);}
 .filter-kicker{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
-.filter-headline{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1;color:var(--ink);margin-bottom:20px;}
+.filter-headline{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:300;line-height:1;color:var(--ink);margin-bottom:16px;}
 .filter-headline em{font-style:italic;}
-.filter-desc{font-size:14px;line-height:1.8;color:var(--muted);max-width:560px;margin-bottom:48px;}
-.filter-states{display:flex;flex-direction:column;gap:24px;}
-.filter-state-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
+.filter-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:52px;}
 
-/* filter UI mockup */
-.fui{border:.5px solid var(--border);border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.06);}
+/* step labels + arrows */
+.filter-steps{display:flex;flex-direction:column;gap:0;}
+.filter-step{position:relative;}
+.filter-step-header{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.step-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
+.step-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.step-arrow{display:flex;align-items:center;justify-content:center;height:36px;padding:0 48px;color:var(--faint);font-size:18px;letter-spacing:.1em;}
+
+/* filter UI */
+.fui{border:.5px solid var(--border);border-radius:2px;overflow:hidden;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.05);}
 .fui-bar{display:flex;align-items:center;gap:32px;padding:14px 24px;border-bottom:.5px solid var(--border);}
-.fui-f{font-size:12px;color:var(--ink2);white-space:nowrap;font-weight:400;}
-.fui-f-active{color:var(--ink);}
+.fui-f{font-size:12px;color:var(--muted);white-space:nowrap;}
+.fui-f-active{color:var(--ink);font-weight:500;}
 .fui-search{margin-left:auto;font-size:12px;color:var(--faint);border:.5px solid var(--border);border-radius:20px;padding:7px 16px;min-width:180px;}
-.fui-search-on{color:var(--ink2);border-color:var(--navy);}
+.fui-search-on{color:var(--ink2);border-color:var(--ink);font-weight:400;}
 .fui-pills{display:flex;gap:7px;flex-wrap:wrap;padding:12px 24px;background:var(--bg2);border-bottom:.5px solid var(--border);}
 .fui-pill{font-size:9px;letter-spacing:.06em;border:.5px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--muted);}
 .fui-pill-on{background:var(--ink);color:#fff;border-color:var(--ink);}
-.fui-chips{display:flex;align-items:center;gap:8px;padding:10px 24px;border-bottom:.5px solid var(--border);flex-wrap:wrap;}
+.fui-chips{display:flex;align-items:center;gap:8px;padding:10px 24px;border-bottom:.5px solid var(--border);flex-wrap:wrap;min-height:40px;}
 .fui-chip-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);}
-.fui-chip{font-size:9px;letter-spacing:.06em;border:.5px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--muted);}
-.fui-chip-on{border-color:var(--ink);color:var(--ink);font-weight:500;}
+.fui-chip{font-size:9px;border:.5px solid var(--border);border-radius:20px;padding:4px 12px;color:var(--muted);}
+.fui-chip-on{border-color:var(--ink);color:var(--ink);font-weight:500;background:rgba(12,12,12,.04);}
 .fui-thead{display:grid;grid-template-columns:140px 1fr 90px 110px 100px;gap:8px;padding:10px 24px;background:var(--bg2);border-bottom:.5px solid var(--border);}
 .fui-thead span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
 .fui-row{display:grid;grid-template-columns:140px 1fr 90px 110px 100px;gap:8px;padding:16px 24px;border-bottom:.5px solid var(--border);align-items:start;transition:background .15s;}
 .fui-row:last-child{border-bottom:none;}
 .fui-row:hover{background:var(--bg2);}
 .fui-co{font-size:13px;font-weight:500;color:var(--ink);}
-.fui-desc{font-size:11px;line-height:1.55;color:var(--muted);padding-right:12px;}
+.fui-desc{font-size:11px;line-height:1.55;color:var(--muted);padding-right:8px;}
 .fui-badge{font-size:10px;color:var(--muted);}
-.fui-empty{padding:20px 24px;font-size:12px;color:var(--faint);font-style:italic;}
+.fui-empty{padding:18px 24px;font-size:12px;color:var(--faint);font-style:italic;}
 
-/* filter outcomes */
-.filter-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border:.5px solid var(--border);}
-.fo-item{padding:24px 28px;border-right:.5px solid var(--border);}
-.fo-item:last-child{border-right:none;}
-.fo-num{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);line-height:1;}
-.fo-label{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border:.5px solid var(--border);background:#fff;}
+.stat{padding:36px 40px;border-right:.5px solid var(--border);transition:background .2s;}
+.stat:last-child{border-right:none;}
+.stat:hover{background:var(--bg2);}
+.stat-num{font-family:var(--serif);font-size:clamp(52px,6vw,80px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;}
+.stat-num-sup{font-size:.45em;vertical-align:super;color:var(--red);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;max-width:160px;}
+.stat-label strong{color:var(--ink2);font-weight:500;display:block;margin-bottom:2px;}
+
+/* outcomes list */
+.filter-outcomes{margin-top:40px;display:flex;flex-direction:column;gap:10px;}
+.fo-item{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.65;color:var(--muted);}
+.fo-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
+.fo-item strong{color:var(--ink2);font-weight:500;}
 
 /* ── CMS SECTION ── */
-.cms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px;max-width:560px;}
-.cms-card{background:var(--bg2);border:.5px solid var(--border);padding:20px 24px;border-radius:2px;transition:border-color .2s;}
-.cms-card:hover{border-color:var(--red);}
-.cms-card-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:6px;}
-.cms-card-body{font-size:11px;line-height:1.65;color:var(--muted);}
+.section{padding:72px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:80px;}
+.section-body{}
+.section-title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:300;color:var(--ink);margin-bottom:16px;line-height:1.15;}
+.section-title em{font-style:italic;color:var(--red);}
+.section-text{font-size:14px;line-height:1.85;color:var(--muted);}
+.cms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:28px;border:.5px solid var(--border);background:var(--border);}
+.cms-card{background:var(--bg);padding:22px 24px;transition:background .2s;}
+.cms-card:hover{background:var(--bg2);}
+.cms-card-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:6px;letter-spacing:.02em;}
+.cms-card-body{font-size:12px;line-height:1.65;color:var(--muted);}
 
-/* ── NEXT ── */
-.next{padding:64px 48px;display:flex;justify-content:space-between;align-items:center;background:var(--bg);}
-.next-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);}
-.next-link{font-family:var(--serif);font-size:clamp(28px,3.5vw,48px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:16px;transition:color .3s;}
+/* ── NEXT PROJECT ── */
+.next{padding:72px 48px;display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:center;border-top:.5px solid var(--border);}
+.next-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
+.next-link-wrap{display:flex;align-items:center;justify-content:space-between;}
+.next-link{font-family:var(--serif);font-size:clamp(32px,4vw,56px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;position:relative;display:inline-block;}
+.next-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:.5px;background:var(--red);transition:width .35s ease;}
+.next-link:hover::after{width:100%;}
 .next-link:hover{color:var(--red);}
-.next-arrow{font-style:normal;font-size:24px;transition:transform .3s;}
-.next-link:hover .next-arrow{transform:translate(5px,-5px);}
+.next-arrow{font-size:28px;color:var(--faint);font-style:normal;transition:transform .3s,color .2s;}
+.next-link-wrap:hover .next-arrow{transform:translate(6px,-6px);color:var(--red);}
 
 /* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.on{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:.1s;}
-.reveal-delay-2{transition-delay:.2s;}
-.reveal-delay-3{transition-delay:.3s;}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
+.reveal-d3{transition-delay:.3s;}
 
 /* ── MOBILE ── */
-@media(max-width:900px){
+@media(max-width:960px){
   nav{padding:16px 20px;}
-  .hero{grid-template-columns:1fr;padding:100px 20px 56px;gap:40px;min-height:auto;}
-  .hero-right{height:220px;}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
+  .hero-right{height:200px;}
   .hero-title{font-size:clamp(44px,12vw,80px);}
-  .hero-tagline{font-size:15px;}
   .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
   .trio{grid-template-columns:1fr;}
   .trio-item{border-right:none;border-bottom:.5px solid var(--border);padding:32px 20px;}
   .trio-item:last-child{border-bottom:none;}
-  .section{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
-  .section-label{position:static;}
-  .img-block{max-width:100%;}
-  .filter-hero{padding:40px 20px;}
-  .filter-outcomes{grid-template-columns:1fr 1fr;}
-  .fo-item:last-child{border-top:.5px solid var(--border);grid-column:1/-1;border-right:none;}
+  .design-block{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
+  .design-label{position:static;}
+  .filter-section{padding:48px 20px;}
   .fui-bar{gap:12px;padding:10px 14px;flex-wrap:wrap;}
-  .fui-search{min-width:0;flex:1;max-width:none;font-size:11px;}
+  .fui-f{font-size:10px;}
+  .fui-search{min-width:0;flex:1;max-width:none;font-size:10px;}
   .fui-thead{display:none;}
-  .fui-row{grid-template-columns:1fr;gap:4px;padding:12px 14px;}
+  .fui-row{grid-template-columns:1fr;gap:3px;padding:12px 14px;}
   .fui-co{font-size:12px;}
   .fui-desc{padding-right:0;font-size:10px;}
-  .fui-badge{font-size:9px;}
-  .fui-row .fui-badge{display:inline;margin-right:6px;}
+  .fui-row .fui-badge{display:inline;font-size:9px;color:var(--faint);margin-right:6px;}
   .fui-pills{padding:8px 14px;}
   .fui-chips{padding:8px 14px;}
-  .cms-grid{grid-template-columns:1fr;max-width:100%;}
-  .next{padding:40px 20px;flex-direction:column;align-items:flex-start;gap:12px;}
-  .filter-outcomes{grid-template-columns:repeat(3,1fr);}
-  .fo-item:last-child{border-top:none;grid-column:auto;border-right:none;}
+  .stats{grid-template-columns:1fr 1fr;background:var(--border);gap:1px;}
+  .stat:last-child{grid-column:1/-1;border-right:none;}
+  .stat{background:var(--bg);border-right:none;}
+  .stat-num{font-size:clamp(44px,10vw,64px);}
+  .section{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
+  .section-label{position:static;}
+  .cms-grid{grid-template-columns:1fr;}
+  .next{grid-template-columns:1fr;padding:40px 20px;gap:16px;}
+  .next-link{font-size:clamp(28px,8vw,44px);}
+  .step-arrow{padding:0 20px;}
 }
-@media(max-width:540px){
-  .filter-outcomes{grid-template-columns:1fr 1fr;}
-  .fo-item:nth-child(3){border-top:.5px solid var(--border);grid-column:1/-1;border-right:none;}
+@media(max-width:480px){
+  .stats{grid-template-columns:1fr;}
+  .stat:last-child{grid-column:1;}
   .fui-bar{gap:8px;}
-  .fui-f{font-size:10px;}
 }
 </style>
 </head>
@@ -216,12 +227,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div class="hero-left">
     <div class="hero-eyebrow">
       <span class="hero-num">01</span>
-      <span class="hero-sep"></span>
+      <span class="hero-line"></span>
       <span class="hero-cat">Webflow · CMS · UI Design</span>
     </div>
     <h1 class="hero-title"><em>Yar</em><br>Ventures</h1>
-    <p class="hero-tagline">Full Webflow build for a Silicon Valley AI & DeepTech VC fund — from brand to scalable CMS system.</p>
-    <p class="hero-sub">Real-time multi-axis filtering across 38+ portfolio companies, built to run without touching code.</p>
+    <p class="hero-sub">Full Webflow platform for a Silicon Valley AI & DeepTech VC — from brand to scalable CMS and real-time filtering.</p>
     <div class="hero-actions">
       <a href="https://www.yarvc.com" target="_blank" class="hero-cta">Visit Live Site <span class="hero-cta-arrow">↗</span></a>
     </div>
@@ -234,19 +244,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
   </div>
   <div class="hero-right">
-    <canvas class="hero-canvas" id="networkCanvas"></canvas>
+    <canvas id="networkCanvas"></canvas>
   </div>
 </section>
 
 <!-- ── SUMMARY ── -->
 <div class="summary reveal">
   <p class="summary-label">Overview</p>
-  <div class="summary-main">
-    <p class="summary-lead">Designed and built a complete Webflow platform for Yar Ventures — a VC fund that needed to look as credible as the companies it backs, and scale as fast as its portfolio grows.</p>
+  <div class="summary-right">
+    <p class="summary-lead">Designed and built a complete platform for Yar Ventures — a VC fund that needed to look as credible as the companies it backs, and <em>scale as fast as its portfolio grows.</em></p>
     <div class="summary-points">
       <div class="summary-point"><strong>38+ portfolio companies</strong> filterable in real time across stage, vertical, and geography</div>
       <div class="summary-point"><strong>4 CMS collections</strong> interconnected — one entry updates the filter page, logo marquee, and event archive automatically</div>
-      <div class="summary-point"><strong>Non-technical team</strong> can manage the entire site independently, with no code changes ever needed</div>
+      <div class="summary-point"><strong>Zero code changes needed</strong> — the entire site is managed by a non-technical team</div>
     </div>
   </div>
 </div>
@@ -254,143 +264,152 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <!-- ── CHALLENGE / APPROACH / OUTCOME ── -->
 <div class="trio">
   <div class="trio-item reveal">
-    <p class="trio-num">Challenge</p>
-    <h3 class="trio-title">A VC fund with no digital presence</h3>
-    <p class="trio-body">Yar Ventures had a growing portfolio, a community of Silicon Valley LPs, and monthly pitch events — but no website that could communicate its scale or credibility. Investors needed a way to browse companies; the team needed a system they could update themselves.</p>
+    <p class="trio-kicker">Challenge</p>
+    <h3 class="trio-title">A growing fund with no digital presence</h3>
+    <p class="trio-body">Yar Ventures had a portfolio, a community of Silicon Valley LPs, and monthly pitch events — but no website that communicated their scale or credibility. Investors needed a way to browse companies; the team needed to update it themselves.</p>
   </div>
-  <div class="trio-item reveal reveal-delay-1">
-    <p class="trio-num">Approach</p>
+  <div class="trio-item reveal reveal-d1">
+    <p class="trio-kicker">Approach</p>
     <h3 class="trio-title">System design first, visuals second</h3>
-    <p class="trio-body">Built around a multi-collection CMS schema before a single visual was designed. The portfolio filter system — stage, vertical, HQ, and live search — was architected using Webflow CMS multi-reference fields and Finsweet CMS Filter to deliver a product-grade experience.</p>
+    <p class="trio-body">Built around a multi-collection CMS schema before a single visual was designed. The portfolio filter — stage, vertical, HQ, and live search — was architected using Webflow CMS multi-reference fields and Finsweet CMS Filter for a product-grade experience.</p>
   </div>
-  <div class="trio-item reveal reveal-delay-2">
-    <p class="trio-num">Outcome</p>
+  <div class="trio-item reveal reveal-d2">
+    <p class="trio-kicker">Outcome</p>
     <h3 class="trio-title">A site that runs itself</h3>
-    <p class="trio-body">The fund's team now adds a new portfolio company in minutes. The homepage marquee, filter page, and all listing views update automatically. The design signals institutional trust — and the system behind it is built to scale to hundreds of companies.</p>
+    <p class="trio-body">Adding a new portfolio company takes minutes. The homepage marquee, filter page, and all listing views update automatically. The design signals institutional trust — and the system behind it is built to scale to hundreds of companies.</p>
   </div>
 </div>
 
-<!-- ── DESIGN ── -->
-<div class="section reveal">
-  <p class="section-label">Design</p>
-  <div class="section-body">
-    <h2 class="section-title">Credibility without coldness</h2>
-    <p>The visual direction had to communicate <strong>trust and forward momentum</strong> — qualities investors expect from a fund, but rarely feel from a startup-built site. The palette is minimal: off-white, dark ink, and a single red accent used only for emphasis and active states. Typography is set in Cormorant Garamond for all headings — a choice that reads editorial rather than corporate.</p>
-    <p>Every section was designed to disappear: the experience should feel like the content, not the design.</p>
-    <div class="img-block">
-      <img src="https://cdn.prod.website-files.com/6930c937a407b45d98f3ecc8/6997834507ce703c2189670e_header-image.avif" alt="Yar Ventures homepage" loading="lazy">
-      <p class="img-caption">Homepage — bold stat counters build instant credibility; portfolio logo marquee signals scale</p>
-    </div>
+<!-- ── DESIGN (text only, no image) ── -->
+<div class="design-block reveal">
+  <p class="design-label">Design</p>
+  <div class="design-body">
+    <h2 class="design-heading">Credibility without coldness</h2>
+    <p class="design-text">Designed to feel trustworthy and structured — without looking corporate or rigid.</p>
+    <p class="design-text">Minimal palette, editorial typography, and restrained motion keep the focus on content.</p>
   </div>
 </div>
 
-<!-- ── FILTER FEATURE HERO ── -->
-<div class="filter-hero reveal">
-  <div class="filter-hero-inner">
-    <p class="filter-kicker">Key Feature</p>
-    <h2 class="filter-headline">Real-time filtering <em>at scale</em></h2>
-    <p class="filter-desc">Investors can explore 38+ portfolio companies instantly — combining dropdown filters with live text search in a single, seamless flow. Every interaction updates results immediately. No page reloads. No friction.</p>
+<!-- ── FILTER SECTION ── -->
+<div class="filter-section reveal">
+  <p class="filter-kicker">Key Feature</p>
+  <h2 class="filter-headline">Real-time filtering <em>at scale</em></h2>
+  <p class="filter-intro">Investors explore 38+ portfolio companies instantly — combining dropdown filters with live text search in a single, seamless flow. Every interaction updates results immediately. No page reloads. No friction.</p>
 
-    <div class="filter-states">
-      <!-- State 1: default -->
-      <div>
-        <p class="filter-state-label">1 — Default view</p>
-        <div class="fui">
-          <div class="fui-bar">
-            <span class="fui-f">Stage ≡</span>
-            <span class="fui-f">Vertical ≡</span>
-            <span class="fui-f">HQ ≡</span>
-            <div class="fui-search">Search companies...</div>
-          </div>
-          <div class="fui-chips">
-            <span class="fui-chip-label">Active Filters:</span>
-            <span class="fui-chip">Clear all</span>
-          </div>
-          <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-          <div class="fui-row"><span class="fui-co">Afforai</span><span class="fui-desc">AI-powered workspace for citation-backed research and literature reviews</span><span class="fui-badge">Pre-seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">Austin</span></div>
-          <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform for enterprise applications</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-          <div class="fui-row"><span class="fui-co">CarIQ Pay</span><span class="fui-desc">Digital payments platform for fuel and toll — single ledger, real-time data</span><span class="fui-badge">Series B</span><span class="fui-badge">Fintech</span><span class="fui-badge">San Francisco</span></div>
-        </div>
+  <div class="filter-steps">
+
+    <!-- Step 1 -->
+    <div class="filter-step reveal">
+      <div class="filter-step-header">
+        <span class="step-num">Step 01</span>
+        <span class="step-title">Default view — all companies visible</span>
       </div>
-
-      <!-- State 2: filter applied -->
-      <div>
-        <p class="filter-state-label">2 — Stage filter applied → Series Seed selected</p>
-        <div class="fui">
-          <div class="fui-bar">
-            <span class="fui-f fui-f-active">Stage —</span>
-            <span class="fui-f">Vertical ≡</span>
-            <span class="fui-f">HQ ≡</span>
-            <div class="fui-search">Search companies...</div>
-          </div>
-          <div class="fui-pills">
-            <span class="fui-pill">Series D</span><span class="fui-pill">Series C</span><span class="fui-pill">Series A</span><span class="fui-pill">Series B</span><span class="fui-pill fui-pill-on">Series Seed</span><span class="fui-pill">Pre-seed</span>
-          </div>
-          <div class="fui-chips">
-            <span class="fui-chip-label">Active Filters:</span>
-            <span class="fui-chip fui-chip-on">Series Seed ×</span>
-            <span class="fui-chip">Clear all</span>
-          </div>
-          <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-          <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-          <div class="fui-row"><span class="fui-co">Charactr</span><span class="fui-desc">AI-powered video at scale — unlimited content with AI twins and synthetic avatars</span><span class="fui-badge">Series Seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">San Francisco</span></div>
+      <div class="fui">
+        <div class="fui-bar">
+          <span class="fui-f">Stage ≡</span>
+          <span class="fui-f">Vertical ≡</span>
+          <span class="fui-f">HQ ≡</span>
+          <div class="fui-search">Search companies...</div>
         </div>
-      </div>
-
-      <!-- State 3: filter + search combined -->
-      <div>
-        <p class="filter-state-label">3 — Filter + live search combined → results narrowed in real time</p>
-        <div class="fui">
-          <div class="fui-bar">
-            <span class="fui-f fui-f-active">Stage ×</span>
-            <span class="fui-f">Vertical ≡</span>
-            <span class="fui-f">HQ ≡</span>
-            <div class="fui-search fui-search-on">AI</div>
-          </div>
-          <div class="fui-chips">
-            <span class="fui-chip-label">Active Filters:</span>
-            <span class="fui-chip fui-chip-on">Series Seed ×</span>
-            <span class="fui-chip fui-chip-on">AI ×</span>
-            <span class="fui-chip">Clear all</span>
-          </div>
-          <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
-          <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
-          <div class="fui-empty">1 result — 37 companies filtered out across Stage + Search</div>
+        <div class="fui-chips">
+          <span class="fui-chip-label">Active Filters:</span>
+          <span class="fui-chip">Clear all</span>
         </div>
+        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
+        <div class="fui-row"><span class="fui-co">Afforai</span><span class="fui-desc">AI-powered workspace for citation-backed research and literature reviews</span><span class="fui-badge">Pre-seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">Austin</span></div>
+        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
+        <div class="fui-row"><span class="fui-co">CarIQ Pay</span><span class="fui-desc">Digital payments for fuel and toll — single ledger, real-time vehicle data</span><span class="fui-badge">Series B</span><span class="fui-badge">Fintech</span><span class="fui-badge">San Francisco</span></div>
       </div>
     </div>
 
-    <!-- outcomes -->
-    <div class="filter-outcomes">
-      <div class="fo-item">
-        <p class="fo-num">38+</p>
-        <p class="fo-label">Portfolio companies filterable in real time</p>
+    <div class="step-arrow reveal">↓</div>
+
+    <!-- Step 2 -->
+    <div class="filter-step reveal">
+      <div class="filter-step-header">
+        <span class="step-num">Step 02</span>
+        <span class="step-title">Stage filter applied → chip appears instantly</span>
       </div>
-      <div class="fo-item">
-        <p class="fo-num">3×1</p>
-        <p class="fo-label">Filters combined with live search simultaneously</p>
-      </div>
-      <div class="fo-item">
-        <p class="fo-num">0</p>
-        <p class="fo-label">Page reloads — all results update instantly</p>
+      <div class="fui">
+        <div class="fui-bar">
+          <span class="fui-f fui-f-active">Stage —</span>
+          <span class="fui-f">Vertical ≡</span>
+          <span class="fui-f">HQ ≡</span>
+          <div class="fui-search">Search companies...</div>
+        </div>
+        <div class="fui-pills">
+          <span class="fui-pill">Series D</span><span class="fui-pill">Series C</span><span class="fui-pill">Series A</span><span class="fui-pill">Series B</span><span class="fui-pill fui-pill-on">Series Seed</span><span class="fui-pill">Pre-seed</span>
+        </div>
+        <div class="fui-chips">
+          <span class="fui-chip-label">Active Filters:</span>
+          <span class="fui-chip fui-chip-on">Series Seed ×</span>
+          <span class="fui-chip">Clear all</span>
+        </div>
+        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
+        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
+        <div class="fui-row"><span class="fui-co">Charactr</span><span class="fui-desc">AI-powered video at scale — unlimited content with AI twins and synthetic avatars</span><span class="fui-badge">Series Seed</span><span class="fui-badge">AI Software</span><span class="fui-badge">San Francisco</span></div>
       </div>
     </div>
 
-    <div class="hlist" style="margin-top:40px;">
-      <div class="hitem"><strong>Instantly filter</strong> 38+ companies across stage, vertical, and geography simultaneously</div>
-      <div class="hitem"><strong>Combine dropdown filters with live search</strong> in a single continuous flow</div>
-      <div class="hitem"><strong>Dynamic chips</strong> reflect the exact user state — removable, clearable, always accurate</div>
-      <div class="hitem"><strong>Built with</strong> Webflow CMS multi-reference fields + Finsweet CMS Filter</div>
+    <div class="step-arrow reveal">↓</div>
+
+    <!-- Step 3 -->
+    <div class="filter-step reveal">
+      <div class="filter-step-header">
+        <span class="step-num">Step 03</span>
+        <span class="step-title">Live search layered on top → results narrowed in real time</span>
+      </div>
+      <div class="fui">
+        <div class="fui-bar">
+          <span class="fui-f fui-f-active">Stage ×</span>
+          <span class="fui-f">Vertical ≡</span>
+          <span class="fui-f">HQ ≡</span>
+          <div class="fui-search fui-search-on">AI</div>
+        </div>
+        <div class="fui-chips">
+          <span class="fui-chip-label">Active Filters:</span>
+          <span class="fui-chip fui-chip-on">Series Seed ×</span>
+          <span class="fui-chip fui-chip-on">AI ×</span>
+          <span class="fui-chip">Clear all</span>
+        </div>
+        <div class="fui-thead"><span>Company</span><span>Description</span><span>Stage</span><span>Vertical</span><span>HQ</span></div>
+        <div class="fui-row"><span class="fui-co">BitHuman</span><span class="fui-desc">AI-driven digital human platform enabling realistic interactive avatars for enterprise</span><span class="fui-badge">Series Seed</span><span class="fui-badge">Generative AI</span><span class="fui-badge">San Francisco</span></div>
+        <div class="fui-empty">1 result — 37 companies filtered out</div>
+      </div>
     </div>
+  </div>
+
+  <!-- STATS — punchy -->
+  <div class="stats reveal">
+    <div class="stat">
+      <p class="stat-num">38<span class="stat-num-sup">+</span></p>
+      <p class="stat-label"><strong>Portfolio companies</strong>filterable in real time</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">3<span class="stat-num-sup">×</span>1</p>
+      <p class="stat-label"><strong>Filters combined</strong>with live search simultaneously</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">0</p>
+      <p class="stat-label"><strong>Page reloads</strong>all results update instantly</p>
+    </div>
+  </div>
+
+  <!-- outcomes -->
+  <div class="filter-outcomes reveal">
+    <div class="fo-item"><strong>Instantly filter</strong> 38+ companies across multiple dimensions simultaneously</div>
+    <div class="fo-item"><strong>Combine dropdown filters with live search</strong> in one seamless flow</div>
+    <div class="fo-item"><strong>Dynamic filter chips</strong> reflect user state in real time — removable, clearable, always accurate</div>
+    <div class="fo-item"><strong>Built with</strong> Webflow CMS multi-reference fields + Finsweet CMS Filter</div>
   </div>
 </div>
 
-<!-- ── CMS ── -->
+<!-- ── CMS SECTION ── -->
 <div class="section reveal">
   <p class="section-label">CMS Architecture</p>
   <div class="section-body">
     <h2 class="section-title">One update. <em>Everywhere.</em></h2>
-    <p>Designed for scalability — a single CMS entry propagates across the filter page, logo marquee, event archive, and any future views automatically. The team adds a new portfolio company in minutes. The site handles the rest.</p>
+    <p class="section-text">Designed for scalability — a single CMS entry propagates across the filter page, logo marquee, event archive, and any future views automatically. The team adds a new portfolio company in minutes. The site handles the rest.</p>
     <div class="cms-grid">
       <div class="cms-card">
         <p class="cms-card-title">Portfolio Companies</p>
@@ -398,7 +417,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       </div>
       <div class="cms-card">
         <p class="cms-card-title">Team Members</p>
-        <p class="cms-card-body">Photo, name, role, bio — structured for future team growth without layout changes</p>
+        <p class="cms-card-body">Photo, name, role, bio — structured for team growth without layout changes</p>
       </div>
       <div class="cms-card">
         <p class="cms-card-title">Synergy Events</p>
@@ -412,73 +431,109 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </div>
 </div>
 
-<!-- ── NEXT ── -->
+<!-- ── NEXT PROJECT ── -->
 <div class="next reveal">
   <p class="next-label">Next Project</p>
-  <a href="persian-tech.html" class="next-link">Persian Tech Network <span class="next-arrow">↗</span></a>
+  <div class="next-link-wrap">
+    <a href="persian-tech.html" class="next-link">Persian Tech Network</a>
+    <span class="next-arrow">↗</span>
+  </div>
 </div>
 
 <script>
-/* cursor */
+/* ── cursor ── */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
 
-/* scroll reveal */
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}}),{threshold:.06});
+/* ── scroll reveal ── */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}
+}),{threshold:.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* network canvas animation */
+/* ── network canvas (cursor-reactive) ── */
 const canvas=document.getElementById('networkCanvas');
 const ctx=canvas.getContext('2d');
-let W,H,nodes=[];
+let W,H,mouse={x:-999,y:-999};
+const nodes=[];
+
 function resize(){
-  W=canvas.width=canvas.offsetWidth;
-  H=canvas.height=canvas.offsetHeight;
+  const rect=canvas.parentElement.getBoundingClientRect();
+  W=canvas.width=rect.width;
+  H=canvas.height=rect.height||420;
 }
-function init(){
-  nodes=[];
-  const count=window.innerWidth<768?10:18;
-  for(let i=0;i<count;i++){
-    nodes.push({
-      x:Math.random()*W,y:Math.random()*H,
-      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
-      r:Math.random()*2.5+1.5
-    });
-  }
+
+function makeNodes(){
+  nodes.length=0;
+  const n=window.innerWidth<768?8:16;
+  for(let i=0;i<n;i++) nodes.push({
+    x:Math.random()*W, y:Math.random()*H,
+    vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
+    r:Math.random()*2+1.5
+  });
 }
+
+/* track cursor relative to canvas */
+canvas.parentElement.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect();
+  mouse.x=e.clientX-r.left;
+  mouse.y=e.clientY-r.top;
+});
+canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999;});
+
 function draw(){
   ctx.clearRect(0,0,W,H);
-  /* connections */
   for(let i=0;i<nodes.length;i++){
+    const n=nodes[i];
+    /* react to cursor */
+    const dx=n.x-mouse.x,dy=n.y-mouse.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<100){
+      const force=(100-dist)/100;
+      n.vx+=dx/dist*force*.6;
+      n.vy+=dy/dist*force*.6;
+    }
+    /* clamp speed */
+    const speed=Math.sqrt(n.vx*n.vx+n.vy*n.vy);
+    if(speed>1.2){n.vx*=1.2/speed;n.vy*=1.2/speed;}
+
+    /* connect to others */
     for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){
+      const m=nodes[j];
+      const ex=n.x-m.x,ey=n.y-m.y;
+      const ed=Math.sqrt(ex*ex+ey*ey);
+      if(ed<130){
         ctx.beginPath();
-        ctx.strokeStyle=`rgba(139,32,32,${(1-dist/120)*.12})`;
+        ctx.strokeStyle=`rgba(139,32,32,${(1-ed/130)*.15})`;
         ctx.lineWidth=.5;
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
         ctx.stroke();
       }
     }
-  }
-  /* nodes */
-  nodes.forEach(n=>{
+    /* draw node */
     ctx.beginPath();
     ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(139,32,32,.25)';
+    ctx.fillStyle=dist<100?`rgba(139,32,32,.5)`:`rgba(139,32,32,.2)`;
     ctx.fill();
+
     n.x+=n.vx;n.y+=n.vy;
     if(n.x<0||n.x>W)n.vx*=-1;
     if(n.y<0||n.y>H)n.vy*=-1;
-  });
+  }
   requestAnimationFrame(draw);
 }
-window.addEventListener('resize',()=>{resize();init();});
-resize();init();draw();
+
+window.addEventListener('resize',()=>{resize();makeNodes();});
+resize();makeNodes();draw();
 </script>
 </body>
 </html>

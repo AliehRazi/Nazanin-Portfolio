@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yar — Nazanin Razi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#8B2020;
+  --navy:#1a2e5e;
+  --ink:#0c0c0c;
+  --muted:#7a7a7a;
+  --faint:#c8c8c8;
+  --bg:#fafaf8;
+  --bg2:#f2f0eb;
+  --border:rgba(0,0,0,0.06);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-r{position:fixed;width:26px;height:26px;border:.5px solid rgba(139,32,32,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);}
+.logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;}
+.logo em{font-style:italic;color:var(--red);}
+.nav-back{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back:hover{color:var(--ink);}
+.nav-back::before{content:'←';}
+
+/* HERO */
+.proj-hero{padding:160px 48px 80px;border-bottom:.5px solid var(--border);}
+.proj-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:40px;opacity:0;animation:fadeUp .6s ease forwards .1s;}
+.proj-index{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);}
+.proj-meta-sep{width:24px;height:.5px;background:var(--faint);}
+.proj-category{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.proj-hero-title{font-family:var(--serif);font-size:clamp(64px,10vw,140px);font-weight:300;line-height:.88;letter-spacing:-.03em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
+.proj-hero-title em{font-style:italic;color:var(--red);}
+.proj-hero-sub{margin-top:32px;font-family:var(--serif);font-size:clamp(15px,1.8vw,20px);font-style:italic;color:var(--muted);max-width:560px;line-height:1.5;opacity:0;animation:fadeUp .7s ease forwards .4s;}
+.proj-tags-row{margin-top:32px;display:flex;gap:8px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s ease forwards .55s;}
+.proj-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:5px 12px;}
+
+/* COVER IMAGE */
+.proj-cover{padding:0 48px;margin-top:64px;opacity:0;animation:fadeUp .8s ease forwards .5s;}
+.proj-cover img{width:100%;display:block;border-radius:2px;}
+
+/* CONTENT */
+.proj-body{padding:80px 48px;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;}
+.proj-body-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;}
+.proj-body-text{font-family:var(--serif);font-size:clamp(18px,2vw,24px);font-weight:300;line-height:1.7;color:var(--ink);}
+.proj-body-text p+p{margin-top:24px;}
+.proj-body-text em{font-style:italic;color:var(--red);}
+
+/* IMAGES GRID */
+.proj-images{padding:0 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.proj-images img{width:100%;display:block;border-radius:2px;}
+.proj-images .full{grid-column:1/-1;}
+
+/* NEXT */
+.proj-next{border-top:.5px solid var(--border);padding:48px;display:flex;justify-content:space-between;align-items:center;}
+.proj-next-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
+.proj-next-link{font-family:var(--serif);font-size:clamp(24px,3vw,40px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:16px;transition:color .3s;}
+.proj-next-link:hover{color:var(--red);}
+.proj-next-link span{font-size:20px;transition:transform .3s;}
+.proj-next-link:hover span{transform:translate(4px,-4px);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+
+@media(max-width:800px){
+  nav,.proj-hero,.proj-cover,.proj-body,.proj-images,.proj-next{padding-left:20px;padding-right:20px;}
+  .proj-body{grid-template-columns:1fr;gap:24px;}
+  .proj-images{grid-template-columns:1fr;}
+  .proj-images .full{grid-column:1;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav>
+  <a href="index.html" class="logo">Nazanin <em>Razi</em></a>
+  <a href="index.html#work" class="nav-back">All Work</a>
+</nav>
+
+<div class="proj-hero">
+  <div class="proj-meta-row">
+    <span class="proj-index">01</span>
+    <span class="proj-meta-sep"></span>
+    <span class="proj-category">Webflow · UI Design · Branding</span>
+  </div>
+  <h1 class="proj-hero-title"><em>Yar</em></h1>
+  <p class="proj-hero-sub">A community-driven AI & DeepTech investment platform for Silicon Valley professionals.</p>
+  <div class="proj-tags-row">
+    <span class="proj-tag">Webflow</span>
+    <span class="proj-tag">UI Design</span>
+    <span class="proj-tag">Branding</span>
+  </div>
+</div>
+
+<div class="proj-cover">
+  <img src="https://screenshots.webflow.com/sites/6930c937a407b45d98f3ecc8/20260416221555_61e4595586c804a1927964f071c876c1.png" alt="Yar platform screenshot">
+</div>
+
+<div class="proj-body reveal">
+  <p class="proj-body-label">About</p>
+  <div class="proj-body-text">
+    <p>Yar is a curated investment platform built for Persian-speaking professionals in Silicon Valley — a space where <em>community</em> meets capital. The challenge was to make something that felt both trusted and forward-looking.</p>
+    <p>The design leans into a refined, editorial aesthetic — generous white space, structured typography, and a restrained color palette that signals credibility without feeling corporate.</p>
+  </div>
+</div>
+
+<div class="proj-images reveal">
+  <img class="full" src="https://screenshots.webflow.com/sites/6930c937a407b45d98f3ecc8/20260416221555_61e4595586c804a1927964f071c876c1.png" alt="Yar full view">
+</div>
+
+<div class="proj-next reveal">
+  <span class="proj-next-label">Next Project</span>
+  <a href="persian-tech.html" class="proj-next-link">Persian Tech Network <span>↗</span></a>
+</div>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

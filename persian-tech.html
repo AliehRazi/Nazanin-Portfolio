@@ -4,173 +4,655 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Persian Tech Network — Nazanin Razi</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta name="description" content="A Silicon Valley community platform for the Iranian tech diaspora — 29 events, 40 speakers, 8,150+ gathered. Designed and built by Nazanin Razi.">
+<meta property="og:title" content="Persian Tech Network — Case Study">
+<meta property="og:description" content="A Silicon Valley community platform for the Iranian tech diaspora — architected to scale with every event, speaker, and startup it hosts.">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --red:#8B2020;--navy:#1a2e5e;--ink:#0c0c0c;--muted:#7a7a7a;--faint:#c8c8c8;
-  --bg:#fafaf8;--bg2:#f2f0eb;--border:rgba(0,0,0,0.06);
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif;
+  --red:#8B2020;
+  --ink:#0c0c0c;
+  --ink2:#2a2a2a;
+  --muted:#5a5a5a;
+  --faint:#999;
+  --bg:#fafaf8;
+  --bg2:#f2f0eb;
+  --border:rgba(0,0,0,0.08);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+
+/* ── custom cursor (disabled on touch) ── */
 #cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-r{position:fixed;width:26px;height:26px;border:.5px solid rgba(139,32,32,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+@media (hover:none){
+  body{cursor:auto;}
+  #cur,#cur-r{display:none;}
+}
+
+a{color:inherit;}
+a:focus-visible{outline:1px solid var(--red);outline-offset:3px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.96);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
 .logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;}
 .logo em{font-style:italic;color:var(--red);}
-.nav-back{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back::before{content:'←';display:inline-block;transition:transform .2s;}
 .nav-back:hover{color:var(--ink);}
-.nav-back::before{content:'←';}
+.nav-back:hover::before{transform:translateX(-4px);}
 
-.proj-hero{padding:160px 48px 72px;border-bottom:.5px solid var(--border);}
-.proj-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:40px;opacity:0;animation:fadeUp .6s ease forwards .1s;}
-.proj-index{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);}
-.proj-meta-sep{width:24px;height:.5px;background:var(--faint);}
-.proj-category{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
-.proj-hero-title{font-family:var(--serif);font-size:clamp(52px,8vw,120px);font-weight:300;line-height:.9;letter-spacing:-.03em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
-.proj-hero-title em{font-style:italic;color:var(--red);}
-.proj-hero-sub{margin-top:28px;font-family:var(--serif);font-size:clamp(15px,1.6vw,19px);font-style:italic;color:var(--muted);max-width:520px;line-height:1.6;opacity:0;animation:fadeUp .7s ease forwards .4s;}
-.proj-tags-row{margin-top:28px;display:flex;gap:8px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s ease forwards .55s;}
-.proj-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:5px 12px;}
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:48px;border-bottom:.5px solid var(--border);}
+.hero-left{display:flex;flex-direction:column;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:36px;opacity:0;animation:fadeUp .5s ease forwards .1s;}
+.hero-num{font-size:10px;letter-spacing:.2em;color:var(--faint);}
+.hero-line{width:24px;height:.5px;background:var(--border);}
+.hero-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.hero-title{font-family:var(--serif);font-size:clamp(56px,8vw,120px);font-weight:300;line-height:.88;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
+.hero-title em{font-style:italic;color:var(--red);}
+.hero-sub{margin-top:24px;font-size:15px;line-height:1.65;color:var(--ink2);max-width:440px;opacity:0;animation:fadeUp .7s ease forwards .4s;font-weight:400;}
+.hero-actions{margin-top:32px;opacity:0;animation:fadeUp .6s ease forwards .55s;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--ink);text-decoration:none;padding:14px 26px;transition:background .25s,gap .2s;}
+.hero-cta:hover{background:var(--red);gap:15px;}
+.hero-cta-arrow{font-size:13px;transition:transform .2s;}
+.hero-cta:hover .hero-cta-arrow{transform:translate(3px,-3px);}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeUp .6s ease forwards .7s;}
+.hero-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:4px 9px;}
 
-.proj-summary{background:var(--bg2);padding:48px;border-bottom:.5px solid var(--border);}
-.proj-summary-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
-.proj-summary-text{font-family:var(--serif);font-size:clamp(16px,1.7vw,21px);font-weight:300;line-height:1.7;color:var(--ink);max-width:680px;}
+/* hero right — orbital canvas */
+.hero-right{position:relative;height:420px;opacity:0;animation:fadeIn 1s ease forwards .6s;}
+#orbitalCanvas{width:100%;height:100%;display:block;}
 
-.proj-section{padding:64px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:180px 1fr;gap:64px;align-items:start;}
-.proj-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:100px;}
-.proj-section-body{font-size:13px;line-height:1.9;color:var(--muted);}
-.proj-section-body strong{color:var(--ink);font-weight:400;}
-.proj-section-body p+p{margin-top:14px;}
+/* ── SUMMARY (dark) ── */
+.summary{background:var(--ink);padding:56px 48px;display:grid;grid-template-columns:160px 1fr;gap:64px;align-items:start;}
+.summary-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);padding-top:4px;}
+.summary-right{display:flex;flex-direction:column;gap:20px;}
+.summary-lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,26px);font-weight:300;line-height:1.45;color:#fff;}
+.summary-lead em{font-style:italic;color:rgba(255,255,255,.5);}
+.summary-points{display:flex;flex-direction:column;gap:10px;}
+.summary-point{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.5);}
+.summary-point::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
+.summary-point strong{color:rgba(255,255,255,.85);font-weight:400;}
 
-.proj-img-block{margin-top:28px;max-width:560px;}
-.proj-img-block img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);}
-.proj-img-caption{margin-top:9px;font-size:10px;letter-spacing:.08em;color:var(--faint);}
+/* ── TRIO ── */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:.5px solid var(--border);}
+.trio-item{padding:48px;border-right:.5px solid var(--border);}
+.trio-item:last-child{border-right:none;}
+.trio-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.trio-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.2;}
+.trio-body{font-size:13px;line-height:1.85;color:var(--muted);}
 
-/* two smaller images side by side */
-.proj-img-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;max-width:560px;}
-.proj-img-duo img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);}
+/* ── DESIGN BLOCK ── */
+.design-block{padding:56px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.design-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;}
+.design-heading{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:300;color:var(--ink);margin-bottom:14px;}
+.design-text{font-size:14px;line-height:1.75;color:var(--muted);max-width:560px;}
+.design-text+.design-text{margin-top:10px;}
 
-.highlight-list{margin-top:16px;display:flex;flex-direction:column;gap:10px;}
-.highlight-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;color:var(--muted);}
-.highlight-item::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
-.highlight-item strong{color:var(--ink);font-weight:400;}
+/* ── KEY FEATURE: ONE ENTRY, EVERY SURFACE ── */
+.feature-section{padding:64px 48px 56px;border-bottom:.5px solid var(--border);background:var(--bg2);}
+.feature-kicker{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.feature-headline{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:300;line-height:1;color:var(--ink);margin-bottom:16px;}
+.feature-headline em{font-style:italic;}
+.feature-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:620px;margin-bottom:44px;}
 
-/* stats row */
-.stat-row{display:flex;gap:40px;margin-top:24px;flex-wrap:wrap;}
-.stat-item{display:flex;flex-direction:column;gap:4px;}
-.stat-num{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);}
-.stat-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);}
+/* fan-out diagram */
+.fanout{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:36px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.04);}
+.fanout-grid{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:center;}
+.fanout-source{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.fanout-source-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;}
+.fanout-card{border:.5px solid var(--ink);padding:20px 22px;background:var(--bg);border-radius:2px;width:100%;text-align:left;}
+.fanout-card-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.fanout-card-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.25;}
+.fanout-card-meta{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--muted);}
+.fanout-card-meta span::before{content:'· ';color:var(--faint);}
+.fanout-arrow-col{display:flex;justify-content:center;align-items:center;font-size:16px;color:var(--faint);}
+.fanout-targets{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fanout-target{border:.5px solid var(--border);padding:14px 16px;border-radius:2px;background:var(--bg);}
+.fanout-target-name{font-size:11px;font-weight:500;color:var(--ink);letter-spacing:.02em;margin-bottom:4px;}
+.fanout-target-desc{font-size:10px;color:var(--muted);line-height:1.5;}
+.fanout-caption{margin-top:22px;font-size:11px;letter-spacing:.04em;color:var(--faint);text-align:center;font-style:italic;}
 
-.proj-next{padding:48px;display:flex;justify-content:space-between;align-items:center;}
-.proj-next-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
-.proj-next-link{font-family:var(--serif);font-size:clamp(22px,3vw,38px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:12px;transition:color .3s;}
-.proj-next-link:hover{color:var(--red);}
-.proj-next-link span{transition:transform .3s;}
-.proj-next-link:hover span{transform:translate(4px,-4px);}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border:.5px solid var(--border);background:#fff;}
+.stat{padding:36px 32px;border-right:.5px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:var(--serif);font-size:clamp(52px,6vw,80px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;}
+.stat-num-sup{font-size:.42em;vertical-align:super;color:var(--red);}
+.stat-label{font-size:11px;color:var(--ink2);margin-top:12px;line-height:1.5;max-width:160px;}
+.stat-label strong{color:var(--ink);font-weight:500;display:block;margin-bottom:3px;font-size:12px;}
 
-.proj-live-link{display:inline-flex;align-items:center;gap:6px;margin-top:28px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:.5px solid var(--ink);padding-bottom:3px;opacity:0;animation:fadeUp .6s ease forwards .7s;transition:color .2s,border-color .2s;}
-.proj-live-link:hover{color:var(--red);border-color:var(--red);}
+.feature-outcomes{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
+.fo-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.65;color:var(--ink2);}
+.fo-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
+.fo-item strong{color:var(--ink);font-weight:500;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+/* ── CMS ARCHITECTURE ── */
+.section{padding:72px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:80px;}
+.cms-headline{font-family:var(--serif);font-size:clamp(26px,2.8vw,40px);font-weight:300;line-height:1.05;color:var(--ink);margin-bottom:16px;}
+.cms-headline em{font-style:italic;color:var(--red);}
+.cms-desc{font-size:14px;line-height:1.8;color:var(--muted);max-width:580px;margin-bottom:36px;}
+.cms-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.cms-nodes{display:flex;flex-direction:column;}
+.cms-node{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:15px 0;border-top:.5px solid var(--border);align-items:start;}
+.cms-node:last-child{border-bottom:.5px solid var(--border);}
+.cms-node-name{font-size:11px;font-weight:500;color:var(--ink);letter-spacing:.04em;text-transform:uppercase;padding-top:2px;}
+.cms-node-desc{font-size:13px;line-height:1.65;color:var(--muted);}
+.cms-node-desc strong{color:var(--ink2);font-weight:500;}
+.cms-value{margin-top:28px;padding:16px 20px;border-left:2px solid var(--ink);}
+.cms-value-text{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink);letter-spacing:.01em;line-height:1.5;}
+
+/* schema diagram */
+.schema-wrap{display:flex;flex-direction:column;align-items:center;}
+.schema-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;align-self:flex-start;}
+.schema-diagram{width:100%;max-width:440px;height:auto;}
+.schema-box{fill:#fff;stroke:var(--ink);stroke-width:.5;}
+.schema-box-label{font-family:var(--sans);font-size:10px;fill:var(--ink);font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
+.schema-box-sub{font-family:var(--sans);font-size:9px;fill:var(--faint);}
+.schema-line{stroke:var(--red);stroke-width:.5;fill:none;opacity:.6;}
+.schema-dot{fill:var(--red);}
+.schema-box.central{fill:var(--ink);}
+.schema-box.central+.schema-label-central{fill:#fff;}
+
+/* ── LIVING ARCHIVE ── */
+.archive-section{padding:72px 48px;border-bottom:.5px solid var(--border);}
+.archive-header{display:grid;grid-template-columns:200px 1fr;gap:80px;margin-bottom:36px;}
+.archive-kicker{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;}
+.archive-heading{font-family:var(--serif);font-size:clamp(26px,2.8vw,40px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:14px;}
+.archive-heading em{font-style:italic;color:var(--red);}
+.archive-text{font-size:14px;line-height:1.8;color:var(--muted);max-width:560px;}
+.archive-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:stretch;}
+.archive-tile{position:relative;aspect-ratio:3/4;border:.5px solid var(--border);border-radius:2px;overflow:hidden;background:var(--bg2);}
+.archive-tile img{width:100%;height:100%;object-fit:cover;display:block;}
+.archive-ghost{display:flex;flex-direction:column;justify-content:space-between;padding:16px;background:var(--bg);}
+.archive-ghost-date{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
+.archive-ghost-line{width:60%;height:.5px;background:var(--border);margin-top:auto;}
+.archive-ghost-count{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--faint);line-height:1;margin-top:12px;}
+.archive-ghost-count em{font-style:italic;color:var(--red);opacity:.7;font-size:.65em;vertical-align:super;}
+.archive-caption{margin-top:24px;font-size:11px;letter-spacing:.04em;color:var(--faint);text-align:center;font-style:italic;}
+
+/* ── NEXT ── */
+.next{padding:72px 48px;display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:center;border-top:.5px solid var(--border);}
+.next-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
+.next-link-wrap{display:flex;align-items:center;justify-content:space-between;}
+.next-link{font-family:var(--serif);font-size:clamp(32px,4vw,56px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;position:relative;display:inline-block;}
+.next-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:.5px;background:var(--red);transition:width .35s ease;}
+.next-link:hover::after{width:100%;}
+.next-link:hover{color:var(--red);}
+.next-arrow{font-size:28px;color:var(--faint);font-style:normal;transition:transform .3s,color .2s;}
+.next-link-wrap:hover .next-arrow{transform:translate(6px,-6px);color:var(--red);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.on{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
+.reveal-d3{transition-delay:.3s;}
 
-@media(max-width:800px){
-  nav,.proj-hero,.proj-summary,.proj-section,.proj-next{padding-left:20px;padding-right:20px;}
-  .proj-section{grid-template-columns:1fr;gap:20px;}
-  .proj-section-label{position:static;}
-  .proj-img-block,.proj-img-duo{max-width:100%;}
-  .proj-img-duo{grid-template-columns:1fr;}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+  .reveal{opacity:1;transform:none;}
+}
+
+/* ── MOBILE ── */
+@media(max-width:960px){
+  nav{padding:16px 20px;}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
+  .hero-right{height:200px;}
+  .hero-title{font-size:clamp(44px,12vw,80px);}
+  .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
+  .trio{grid-template-columns:1fr;}
+  .trio-item{border-right:none;border-bottom:.5px solid var(--border);padding:32px 20px;}
+  .trio-item:last-child{border-bottom:none;}
+  .design-block{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
+  .feature-section{padding:48px 20px;}
+  .fanout{padding:24px;}
+  .fanout-grid{grid-template-columns:1fr;gap:28px;}
+  .fanout-source{max-width:100%;}
+  .fanout-targets{grid-template-columns:1fr 1fr;}
+  .fanout-arrow-col{transform:rotate(90deg);}
+  .stats{grid-template-columns:1fr 1fr;background:var(--border);gap:1px;}
+  .stat{background:var(--bg);border-right:none;}
+  .stat-num{font-size:clamp(44px,11vw,64px);}
+  .section{grid-template-columns:1fr;padding:40px 20px;gap:24px;}
+  .section-label{position:static;}
+  .cms-inner{grid-template-columns:1fr;gap:36px;}
+  .cms-node{grid-template-columns:1fr;gap:6px;}
+  .archive-section{padding:48px 20px;}
+  .archive-header{grid-template-columns:1fr;gap:20px;margin-bottom:24px;}
+  .archive-grid{grid-template-columns:repeat(2,1fr);}
+  .next{grid-template-columns:1fr;padding:40px 20px;gap:16px;}
+  .next-link{font-size:clamp(28px,8vw,44px);}
+}
+@media(max-width:480px){
+  .fanout-targets{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 <div id="cur"></div>
 <div id="cur-r"></div>
+
 <nav>
   <a href="index.html" class="logo">Nazanin <em>Razi</em></a>
   <a href="index.html#work" class="nav-back">All Work</a>
 </nav>
 
-<div class="proj-hero">
-  <div class="proj-meta-row">
-    <span class="proj-index">02</span>
-    <span class="proj-meta-sep"></span>
-    <span class="proj-category">Webflow · CMS · Events</span>
-  </div>
-  <h1 class="proj-hero-title">Persian <em>Tech</em><br>Network</h1>
-  <p class="proj-hero-sub">A platform inspiring and connecting the next wave of Persian tech leaders worldwide.</p>
-  <div class="proj-tags-row">
-    <span class="proj-tag">Webflow</span>
-    <span class="proj-tag">CMS</span>
-    <span class="proj-tag">Events</span>
-    <span class="proj-tag">Multi-reference Fields</span>
-  </div>
-  <a href="https://persiantechnetwork.webflow.io" target="_blank" class="proj-live-link">Visit Live Site ↗</a>
-</div>
-
-<div class="proj-summary reveal">
-  <p class="proj-summary-label">Portfolio Summary</p>
-  <p class="proj-summary-text">A Webflow platform for a recurring Silicon Valley event series — built around a relational CMS that links speakers, startups, and events in a single schema. Designed to be fully managed by a non-technical team, the site has scaled to 29 events, 40 speakers, and 8,150+ attendees with zero code changes.</p>
-</div>
-
-<div class="proj-section reveal">
-  <p class="proj-section-label">Scale & Impact</p>
-  <div class="proj-section-body">
-    <p>The site was built to grow — and it has. All numbers are pulled from <strong>live CMS data</strong>, updating automatically as new events are added.</p>
-    <div class="stat-row">
-      <div class="stat-item"><span class="stat-num">29</span><span class="stat-label">Events</span></div>
-      <div class="stat-item"><span class="stat-num">40</span><span class="stat-label">Speakers</span></div>
-      <div class="stat-item"><span class="stat-num">60</span><span class="stat-label">Startup Pitches</span></div>
-      <div class="stat-item"><span class="stat-num">8,150+</span><span class="stat-label">Attendees</span></div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-num">02</span>
+      <span class="hero-line"></span>
+      <span class="hero-cat">Webflow · Community · CMS Architecture</span>
     </div>
-    <div class="proj-img-block">
-      <img src="https://screenshots.webflow.com/sites/6826973fc360e9461d1cfb45/20260402002133_9ec6af7afdef2526b8573c6491aca3cf.png" alt="Persian Tech Network homepage">
-      <p class="proj-img-caption">Homepage — animated stat counters and latest event cards</p>
+    <h1 class="hero-title">Persian <em>Tech</em><br>Network</h1>
+    <p class="hero-sub">A Silicon Valley gathering for the Iranian tech diaspora — with a platform architected to scale alongside every event, speaker, and startup it hosts.</p>
+    <div class="hero-actions">
+      <a href="https://persiantechnetwork.webflow.io" target="_blank" rel="noopener noreferrer" class="hero-cta">Visit Live Site <span class="hero-cta-arrow">↗</span></a>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Webflow</span>
+      <span class="hero-tag">CMS Architecture</span>
+      <span class="hero-tag">Community Platform</span>
+      <span class="hero-tag">Event System</span>
+      <span class="hero-tag">UI Design</span>
     </div>
   </div>
-</div>
+  <div class="hero-right">
+    <canvas id="orbitalCanvas"></canvas>
+  </div>
+</section>
 
-<div class="proj-section reveal">
-  <p class="proj-section-label">CMS Architecture</p>
-  <div class="proj-section-body">
-    <p>The CMS is built around a <strong>relational event schema</strong> — each event links to multiple speaker and startup entries, allowing the site to display rich, connected data from a single source of truth.</p>
-    <div class="highlight-list">
-      <div class="highlight-item"><strong>Events</strong> — date, poster image, registration link, multi-ref to speakers and startups</div>
-      <div class="highlight-item"><strong>Speakers</strong> — name, photo, LinkedIn, bio; referenced per event</div>
-      <div class="highlight-item"><strong>Startups</strong> — founder name, LinkedIn; referenced per event</div>
-      <div class="highlight-item"><strong>Flyers Archive</strong> — image-only collection, paginated, auto-populates the archive page</div>
+<!-- ── SUMMARY ── -->
+<div class="summary reveal">
+  <p class="summary-label">Overview</p>
+  <div class="summary-right">
+    <p class="summary-lead">Built the digital home for a monthly Silicon Valley gathering now entering its fourth year — a platform that gets <em>lighter as the archive grows heavier.</em></p>
+    <div class="summary-points">
+      <div class="summary-point"><strong>29 events, 40 speakers, 60 startup pitches</strong> — all surfaced, searchable, and interconnected from a single CMS</div>
+      <div class="summary-point"><strong>8,150+ attendees gathered</strong> across four years of monthly programming in the San Francisco Bay Area</div>
+      <div class="summary-point"><strong>Run by a non-technical team</strong> — a new event, flyer, speaker, and startup takes one entry, not six</div>
     </div>
-    <p style="margin-top:14px;">Adding a new monthly event requires one CMS entry — the homepage carousel, archive page, and counter stats all update automatically.</p>
   </div>
 </div>
 
-<div class="proj-section reveal">
-  <p class="proj-section-label">Event Flyers Archive</p>
-  <div class="proj-section-body">
-    <p>The Flyers page serves as a <strong>visual archive</strong> of every past event — a paginated CMS grid that scales indefinitely. Each flyer links to its full event detail page.</p>
-    <div class="proj-img-duo">
-      <img src="https://cdn.prod.website-files.com/682bd4ca63364803c22bce9f/68b7366b00553d556885d13c_PTN%20SEP2025-02%20(1).jpg" alt="PTN September 2025 event flyer">
-      <img src="https://cdn.prod.website-files.com/682bd4ca63364803c22bce9f/6892a4c6e9236282e1f6eec4_PTN%20AUG%202025-02%20(1).jpg" alt="PTN August 2025 event flyer">
-    </div>
-    <p class="proj-img-caption" style="margin-top:9px;">Event flyers — each pulled from CMS, linking to speaker and startup details</p>
+<!-- ── CHALLENGE / APPROACH / OUTCOME ── -->
+<div class="trio">
+  <div class="trio-item reveal">
+    <p class="trio-kicker">Challenge</p>
+    <h3 class="trio-title">A growing community, a growing maintenance burden</h3>
+    <p class="trio-body">Every month brought a new event, new flyers, new speaker bios, new startup pitches — and no structure tying them together. The operational weight was starting to outpace the community's ability to document itself.</p>
+  </div>
+  <div class="trio-item reveal reveal-d1">
+    <p class="trio-kicker">Approach</p>
+    <h3 class="trio-title">Model the community, not the content</h3>
+    <p class="trio-body">Designed a relational CMS before a single pixel: events, speakers, and startups as interconnected collections. The website became a view of the data — not a container for it. Content structure first, visuals second.</p>
+  </div>
+  <div class="trio-item reveal reveal-d2">
+    <p class="trio-kicker">Outcome</p>
+    <h3 class="trio-title">An archive that grows itself</h3>
+    <p class="trio-body">One CMS entry per month populates five surfaces. Homepage counters, archive grid, event detail pages, speaker profiles, and startup listings update automatically — with zero duplication, zero syncing, zero code.</p>
   </div>
 </div>
 
-<div class="proj-next reveal">
-  <span class="proj-next-label">Next Project</span>
-  <a href="primer.html" class="proj-next-link">Primer <span>↗</span></a>
+<!-- ── DESIGN BLOCK ── -->
+<div class="design-block reveal">
+  <p class="design-label">Design</p>
+  <div>
+    <h2 class="design-heading">Editorial, not ornamental</h2>
+    <p class="design-text">Typography and spacing carry the hierarchy — the community's character lives in the details, not the decoration.</p>
+    <p class="design-text">Minimal palette, restrained motion, editorial serif. A site built to age well across hundreds of events, not peak in a single season.</p>
+  </div>
+</div>
+
+<!-- ── KEY FEATURE: FAN-OUT ── -->
+<div class="feature-section reveal">
+  <p class="feature-kicker">Key Feature</p>
+  <h2 class="feature-headline">One entry.<br><em>Every surface.</em></h2>
+  <p class="feature-intro">Adding a monthly event is a single CMS action. Behind it, the platform fans out automatically — the homepage refreshes, counters increment, archive cards generate, speaker profiles update, and startup listings extend. The non-technical team never touches a template.</p>
+
+  <!-- fan-out diagram -->
+  <div class="fanout reveal">
+    <div class="fanout-grid">
+      <div class="fanout-source">
+        <p class="fanout-source-label">One CMS Entry</p>
+        <div class="fanout-card">
+          <p class="fanout-card-tag">New Event</p>
+          <p class="fanout-card-title">PTN · Monthly Gathering</p>
+          <div class="fanout-card-meta">
+            <span>Date, flyer, registration</span>
+            <span>Speakers (multi-ref)</span>
+            <span>Startups (multi-ref)</span>
+          </div>
+        </div>
+      </div>
+      <div class="fanout-targets">
+        <div class="fanout-target">
+          <p class="fanout-target-name">Homepage featured card</p>
+          <p class="fanout-target-desc">Latest event appears automatically</p>
+        </div>
+        <div class="fanout-target">
+          <p class="fanout-target-name">Stat counters</p>
+          <p class="fanout-target-desc">Events, speakers, startups all tick up</p>
+        </div>
+        <div class="fanout-target">
+          <p class="fanout-target-name">Archive grid</p>
+          <p class="fanout-target-desc">New flyer joins the paginated archive</p>
+        </div>
+        <div class="fanout-target">
+          <p class="fanout-target-name">Event detail page</p>
+          <p class="fanout-target-desc">Generated from the event template</p>
+        </div>
+        <div class="fanout-target">
+          <p class="fanout-target-name">Speaker profiles</p>
+          <p class="fanout-target-desc">Each speaker's history extends by one</p>
+        </div>
+        <div class="fanout-target">
+          <p class="fanout-target-name">Startup listings</p>
+          <p class="fanout-target-desc">New pitch joins the master directory</p>
+        </div>
+      </div>
+    </div>
+    <p class="fanout-caption">one entry → six live surfaces, no manual syncing</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats reveal">
+    <div class="stat">
+      <p class="stat-num">29</p>
+      <p class="stat-label"><strong>Events</strong> held across four years of monthly programming</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">40</p>
+      <p class="stat-label"><strong>Speakers</strong> hosted, archived, and profiled on the platform</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">60</p>
+      <p class="stat-label"><strong>Startup pitches</strong> indexed and linked to their founders</p>
+    </div>
+    <div class="stat">
+      <p class="stat-num">8,150<span class="stat-num-sup">+</span></p>
+      <p class="stat-label"><strong>Attendees</strong> gathered across the community's run</p>
+    </div>
+  </div>
+
+  <!-- outcomes -->
+  <div class="feature-outcomes reveal">
+    <div class="fo-item"><strong>One entry populates six surfaces</strong> — homepage, counters, archive, event detail, speaker profile, startup listing</div>
+    <div class="fo-item"><strong>Zero manual syncing</strong> between collections — multi-reference fields carry the relationships</div>
+    <div class="fo-item"><strong>Archive scales indefinitely</strong> — the page structure doesn't change at 30 events or 300</div>
+    <div class="fo-item"><strong>Fully managed by a non-technical team</strong> — no developer touch required to run the cadence</div>
+  </div>
+</div>
+
+<!-- ── CMS ARCHITECTURE ── -->
+<div class="section reveal">
+  <p class="section-label">CMS Architecture</p>
+  <div>
+    <h2 class="cms-headline">Four collections.<br><em>One community.</em></h2>
+    <p class="cms-desc">The schema mirrors how the community actually works — events hold the context, speakers and startups carry their own histories, and the flyer archive gives the collection a visual memory. Every relationship is a multi-reference, not a copy.</p>
+
+    <div class="cms-inner">
+      <div class="cms-nodes">
+        <div class="cms-node">
+          <p class="cms-node-name">Events</p>
+          <p class="cms-node-desc"><strong>Central collection</strong> — date, flyer, registration link, multi-references to speakers and startups</p>
+        </div>
+        <div class="cms-node">
+          <p class="cms-node-name">Speakers</p>
+          <p class="cms-node-desc"><strong>Profile collection</strong> — name, photo, bio, LinkedIn; one speaker, many appearances</p>
+        </div>
+        <div class="cms-node">
+          <p class="cms-node-name">Startups</p>
+          <p class="cms-node-desc"><strong>Pitch collection</strong> — founder, LinkedIn, referenced by the event they pitched at</p>
+        </div>
+        <div class="cms-node">
+          <p class="cms-node-name">Flyers</p>
+          <p class="cms-node-desc"><strong>Visual archive</strong> — image-led collection, paginated by design, auto-populates the archive page</p>
+        </div>
+      </div>
+
+      <!-- SVG schema diagram -->
+      <div class="schema-wrap">
+        <p class="schema-label">Relational schema</p>
+        <svg class="schema-diagram" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schema diagram: Events at the center, connected to Speakers, Startups, and Flyers">
+          <!-- connecting lines (drawn first, behind boxes) -->
+          <line class="schema-line" x1="220" y1="170" x2="90" y2="60"/>
+          <line class="schema-line" x1="220" y1="170" x2="350" y2="60"/>
+          <line class="schema-line" x1="220" y1="170" x2="90" y2="280"/>
+          <line class="schema-line" x1="220" y1="170" x2="350" y2="280"/>
+          <!-- relationship dots -->
+          <circle class="schema-dot" cx="155" cy="115" r="2"/>
+          <circle class="schema-dot" cx="285" cy="115" r="2"/>
+          <circle class="schema-dot" cx="155" cy="225" r="2"/>
+          <circle class="schema-dot" cx="285" cy="225" r="2"/>
+
+          <!-- Events (central) -->
+          <rect class="schema-box" x="160" y="140" width="120" height="60" fill="#0c0c0c"/>
+          <text x="220" y="168" text-anchor="middle" fill="#fff" class="schema-box-label">Events</text>
+          <text x="220" y="184" text-anchor="middle" fill="rgba(255,255,255,0.5)" class="schema-box-sub">central collection</text>
+
+          <!-- Speakers (top-left) -->
+          <rect class="schema-box" x="30" y="30" width="120" height="60"/>
+          <text x="90" y="58" text-anchor="middle" class="schema-box-label">Speakers</text>
+          <text x="90" y="74" text-anchor="middle" class="schema-box-sub">multi-ref</text>
+
+          <!-- Startups (top-right) -->
+          <rect class="schema-box" x="290" y="30" width="120" height="60"/>
+          <text x="350" y="58" text-anchor="middle" class="schema-box-label">Startups</text>
+          <text x="350" y="74" text-anchor="middle" class="schema-box-sub">multi-ref</text>
+
+          <!-- Flyers (bottom-left) -->
+          <rect class="schema-box" x="30" y="250" width="120" height="60"/>
+          <text x="90" y="278" text-anchor="middle" class="schema-box-label">Flyers</text>
+          <text x="90" y="294" text-anchor="middle" class="schema-box-sub">image archive</text>
+
+          <!-- Attendance/Context (bottom-right) -->
+          <rect class="schema-box" x="290" y="250" width="120" height="60"/>
+          <text x="350" y="278" text-anchor="middle" class="schema-box-label">Archive</text>
+          <text x="350" y="294" text-anchor="middle" class="schema-box-sub">auto-paginated</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cms-value">
+      <p class="cms-value-text">A website shaped like the community — not like a content list.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIVING ARCHIVE ── -->
+<div class="archive-section reveal">
+  <div class="archive-header">
+    <p class="archive-kicker">Living Archive</p>
+    <div>
+      <h2 class="archive-heading">Every gathering, <em>preserved.</em></h2>
+      <p class="archive-text">Each monthly flyer joins a paginated CMS archive — an image-led record of the community's trajectory. Every tile deep-links to its event, speakers, and startups, turning the visual history into a navigable one.</p>
+    </div>
+  </div>
+  <div class="archive-grid">
+    <div class="archive-tile">
+      <img src="https://cdn.prod.website-files.com/682bd4ca63364803c22bce9f/68b7366b00553d556885d13c_PTN%20SEP2025-02%20(1).jpg" alt="PTN September 2025 event flyer" loading="lazy">
+    </div>
+    <div class="archive-tile">
+      <img src="https://cdn.prod.website-files.com/682bd4ca63364803c22bce9f/6892a4c6e9236282e1f6eec4_PTN%20AUG%202025-02%20(1).jpg" alt="PTN August 2025 event flyer" loading="lazy">
+    </div>
+    <div class="archive-tile archive-ghost">
+      <p class="archive-ghost-date">Jul · 2025</p>
+      <div>
+        <div class="archive-ghost-line"></div>
+      </div>
+    </div>
+    <div class="archive-tile archive-ghost">
+      <p class="archive-ghost-date">Jun · 2025</p>
+      <div>
+        <div class="archive-ghost-line"></div>
+      </div>
+    </div>
+    <div class="archive-tile archive-ghost">
+      <p class="archive-ghost-date">+ 25 more</p>
+      <p class="archive-ghost-count">29<em>events</em></p>
+    </div>
+  </div>
+  <p class="archive-caption">Two flyers shown — the archive spans 29 events across four years</p>
+</div>
+
+<!-- ── NEXT PROJECT ── -->
+<div class="next reveal">
+  <p class="next-label">Next Project</p>
+  <div class="next-link-wrap">
+    <a href="primer.html" class="next-link">Primer</a>
+    <span class="next-arrow">↗</span>
+  </div>
 </div>
 
 <script>
+/* ── custom cursor ── */
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}}),{threshold:.08});
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+
+/* ── scroll reveal ── */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}
+}),{threshold:.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── orbital canvas: community gathering around a center ── */
+const canvas=document.getElementById('orbitalCanvas');
+const ctx=canvas.getContext('2d');
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,cx,cy;
+let mouseX=-9999,mouseY=-9999;
+const orbits=[];
+let rafId=null;
+let isVisible=true;
+
+function resize(){
+  const rect=canvas.parentElement.getBoundingClientRect();
+  W=canvas.width=rect.width;
+  H=canvas.height=rect.height||420;
+  cx=W/2;cy=H/2;
+}
+
+function makeOrbits(){
+  orbits.length=0;
+  /* three concentric orbit bands */
+  const config=[
+    {radius:Math.min(W,H)*.18, count:5, speed:.0018, r:2.2},
+    {radius:Math.min(W,H)*.30, count:8, speed:.0013, r:1.8},
+    {radius:Math.min(W,H)*.42, count:11, speed:.0009, r:1.4},
+  ];
+  config.forEach(c=>{
+    for(let i=0;i<c.count;i++){
+      orbits.push({
+        radius:c.radius,
+        angle:Math.random()*Math.PI*2,
+        speed:c.speed*(.7+Math.random()*.6)*(Math.random()<.5?1:-1),
+        r:c.r
+      });
+    }
+  });
+}
+
+canvas.parentElement.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect();
+  mouseX=e.clientX-r.left;
+  mouseY=e.clientY-r.top;
+});
+canvas.parentElement.addEventListener('mouseleave',()=>{mouseX=-9999;mouseY=-9999;});
+
+/* pause animation when hero out of viewport */
+const heroObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    isVisible=e.isIntersecting;
+    if(isVisible && !rafId && !reducedMotion) draw();
+  });
+},{threshold:0});
+heroObserver.observe(canvas);
+
+function draw(){
+  if(!isVisible){rafId=null;return;}
+  ctx.clearRect(0,0,W,H);
+
+  /* center drifts subtly toward cursor */
+  const drift=60;
+  const tcx=mouseX>-1000?cx+(mouseX-cx)/W*drift:cx;
+  const tcy=mouseY>-1000?cy+(mouseY-cy)/H*drift:cy;
+
+  /* central node */
+  ctx.beginPath();
+  ctx.arc(tcx,tcy,3,0,Math.PI*2);
+  ctx.fillStyle='rgba(139,32,32,.8)';
+  ctx.fill();
+
+  /* faint orbit rings */
+  const ringRadii=[Math.min(W,H)*.18,Math.min(W,H)*.30,Math.min(W,H)*.42];
+  ringRadii.forEach(r=>{
+    ctx.beginPath();
+    ctx.arc(tcx,tcy,r,0,Math.PI*2);
+    ctx.strokeStyle='rgba(139,32,32,.06)';
+    ctx.lineWidth=.5;
+    ctx.stroke();
+  });
+
+  /* orbital dots */
+  const points=[];
+  orbits.forEach(o=>{
+    o.angle+=o.speed;
+    const x=tcx+Math.cos(o.angle)*o.radius;
+    const y=tcy+Math.sin(o.angle)*o.radius;
+    points.push({x,y,r:o.r});
+  });
+
+  /* connect nearby dots */
+  for(let i=0;i<points.length;i++){
+    for(let j=i+1;j<points.length;j++){
+      const dx=points[i].x-points[j].x, dy=points[i].y-points[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<70){
+        ctx.beginPath();
+        ctx.strokeStyle=`rgba(139,32,32,${(1-d/70)*.12})`;
+        ctx.lineWidth=.5;
+        ctx.moveTo(points[i].x,points[i].y);
+        ctx.lineTo(points[j].x,points[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  /* draw dots */
+  points.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(139,32,32,.45)';
+    ctx.fill();
+  });
+
+  rafId=requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize',()=>{resize();makeOrbits();});
+resize();
+makeOrbits();
+if(!reducedMotion) draw();
 </script>
 </body>
 </html>

@@ -14,8 +14,16 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-r{position:fixed;width:26px;height:26px;border:.5px solid rgba(139,32,32,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s ease,height .18s ease;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.22);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s ease,height .22s ease,border-color .22s ease;}
+#cur.is-hover{width:11px;height:11px;}
+#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.42);}
+a,button,[role="button"]{cursor:none;}
+@media(max-width:960px){
+  body{cursor:auto;}
+  a,button,[role="button"]{cursor:auto;}
+  #cur,#cur-r{display:none;}
+}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);}
 .logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;}
 .logo em{font-style:italic;color:var(--red);}
@@ -162,10 +170,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:fl
 </div>
 
 <script>
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+/* ── cursor & hover interaction ── */
+(function(){
+  const isTouch = window.matchMedia('(max-width:960px)').matches
+    || navigator.maxTouchPoints > 0
+    || ('ontouchstart' in window);
+  if (isTouch) return;
+  const dot  = document.getElementById('cur');
+  const ring = document.getElementById('cur-r');
+  if (!dot || !ring) return;
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function loop(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  const CLICKABLE = 'a, button, [role="button"], input, select, textarea';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.add('is-hover'); ring.classList.add('is-hover'); }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
+  });
+})();
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>

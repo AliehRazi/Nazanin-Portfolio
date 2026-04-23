@@ -21,13 +21,14 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s ease,height .2s ease,opacity .2s ease;}
-#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,border-color .25s ease;}
-#cur.is-hover{width:12px;height:12px;}
-#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.45);}
-/* ── disable custom cursor on touch/tablet ── */
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s ease,height .18s ease;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.22);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s ease,height .22s ease,border-color .22s ease;}
+#cur.is-hover{width:11px;height:11px;}
+#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.42);}
+a,button,[role="button"]{cursor:none;}
 @media(max-width:960px){
   body{cursor:auto;}
+  a,button,[role="button"]{cursor:auto;}
   #cur,#cur-r{display:none;}
 }
 
@@ -76,8 +77,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── CHALLENGE / APPROACH / OUTCOME ── */
 .trio{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:.5px solid var(--border);}
-.trio-item{padding:48px;border-right:.5px solid var(--border);transition:background .2s;}
-.trio-item:hover{background:var(--bg2);}
+.trio-item{padding:48px;border-right:.5px solid var(--border);}
+
 .trio-item:last-child{border-right:none;}
 .trio-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
 .trio-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--ink);margin-bottom:12px;}
@@ -131,9 +132,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border:.5px solid var(--border);background:#fff;}
-.stat{padding:40px 48px;border-right:.5px solid var(--border);transition:background .2s;}
+.stat{padding:40px 48px;border-right:.5px solid var(--border);}
 .stat:last-child{border-right:none;}
-.stat:hover{background:var(--bg2);}
+
 .stat-num{font-family:var(--serif);font-size:clamp(64px,7vw,96px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;}
 .stat-num-sup{font-size:.4em;vertical-align:super;color:var(--red);}
 .stat-label{font-size:13px;color:var(--ink2);margin-top:14px;line-height:1.55;max-width:180px;}
@@ -405,59 +406,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 </div>
 
 <script>
-const isTouchDevice = () => window.matchMedia('(max-width:960px)').matches
-  || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-
-/* ── cursor (desktop only) ── */
-const cur = document.getElementById('cur');
-const ring = document.getElementById('cur-r');
-let mx=0, my=0, rx=0, ry=0;
-let cursorActive = false;
-
-if (!isTouchDevice()) {
-  cursorActive = true;
-
+/* ── cursor & hover interaction ── */
+(function(){
+  const isTouch = window.matchMedia('(max-width:960px)').matches
+    || navigator.maxTouchPoints > 0
+    || ('ontouchstart' in window);
+  if (isTouch) return;
+  const dot  = document.getElementById('cur');
+  const ring = document.getElementById('cur-r');
+  if (!dot || !ring) return;
+  let mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cur.style.left  = mx + 'px';
-    cur.style.top   = my + 'px';
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
   });
-
-  /* smooth ring follow */
   (function loop(){
-    rx += (mx - rx) * .12;
-    ry += (my - ry) * .12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
     requestAnimationFrame(loop);
   })();
-
-  /* dot grow on hover over clickable elements */
-  const clickable = 'a,button,[role="button"],label,input,select,textarea,.hero-cta,.nav-back,.next-link,.trio-item,.cms-card,.stat';
-  document.querySelectorAll(clickable).forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cur.classList.add('is-hover');
-      ring.classList.add('is-hover');
-    });
-    el.addEventListener('mouseleave', () => {
-      cur.classList.remove('is-hover');
-      ring.classList.remove('is-hover');
-    });
-  });
-  /* also catch dynamically via delegation */
+  const CLICKABLE = 'a, button, [role="button"], input, select, textarea';
   document.addEventListener('mouseover', e => {
-    if (e.target.closest('a,button,[role="button"]')) {
-      cur.classList.add('is-hover');
-      ring.classList.add('is-hover');
-    }
+    if (e.target.closest(CLICKABLE)) { dot.classList.add('is-hover'); ring.classList.add('is-hover'); }
   });
   document.addEventListener('mouseout', e => {
-    if (e.target.closest('a,button,[role="button"]')) {
-      cur.classList.remove('is-hover');
-      ring.classList.remove('is-hover');
-    }
+    if (e.target.closest(CLICKABLE)) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
   });
-}
+})();
 
 /* ── scroll reveal ── */
 const obs = new IntersectionObserver(entries => entries.forEach(e => {
@@ -467,7 +442,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 /* ── network canvas (desktop only) ── */
 const canvas = document.getElementById('networkCanvas');
-if (canvas && !isTouchDevice()) {
+if (canvas && !window.matchMedia('(max-width:960px)').matches && navigator.maxTouchPoints === 0) {
   const ctx = canvas.getContext('2d');
   let W, H, mouse = {x:-999, y:-999};
   const nodes = [];
@@ -533,7 +508,6 @@ if (canvas && !isTouchDevice()) {
   window.addEventListener('resize', () => { resize(); makeNodes(); });
   resize(); makeNodes(); draw();
 } else if (canvas) {
-  /* on mobile: hide canvas container cleanly */
   canvas.parentElement.style.display = 'none';
 }
 </script>

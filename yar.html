@@ -85,11 +85,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .design-text+.design-text{margin-top:8px;}
 
 /* ── FILTER SECTION ── */
-.filter-section{padding:72px 48px;border-bottom:.5px solid var(--border);background:var(--bg2);}
+.filter-section{padding:64px 48px 56px;border-bottom:.5px solid var(--border);background:var(--bg2);}
 .filter-kicker{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
 .filter-headline{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:300;line-height:1;color:var(--ink);margin-bottom:16px;}
 .filter-headline em{font-style:italic;}
-.filter-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:52px;}
+.filter-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:580px;margin-bottom:36px;}
 
 /* step labels + arrows */
 
@@ -118,25 +118,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .fui-empty{padding:18px 24px;font-size:12px;color:var(--faint);font-style:italic;}
 
 /* ── FILTER GIF ── */
-.filter-demo-wrap{margin-bottom:40px;}
-.filter-demo-gif{width:100%;max-width:860px;display:block;border-radius:3px;border:.5px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.07);}
-.filter-demo-caption{margin-top:10px;font-size:11px;letter-spacing:.06em;color:var(--faint);}
+.filter-demo-wrap{margin-bottom:28px;display:flex;flex-direction:column;align-items:center;}
+.filter-demo-gif{width:100%;max-width:1060px;display:block;border-radius:3px;border:.5px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);}
+.filter-demo-caption{display:none;}
 
 /* ── STATS ── */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border:.5px solid var(--border);background:#fff;}
-.stat{padding:36px 40px;border-right:.5px solid var(--border);transition:background .2s;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border:.5px solid var(--border);background:#fff;}
+.stat{padding:40px 48px;border-right:.5px solid var(--border);transition:background .2s;}
 .stat:last-child{border-right:none;}
 .stat:hover{background:var(--bg2);}
-.stat-num{font-family:var(--serif);font-size:clamp(52px,6vw,80px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;}
-.stat-num-sup{font-size:.45em;vertical-align:super;color:var(--red);}
-.stat-label{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;max-width:160px;}
-.stat-label strong{color:var(--ink2);font-weight:500;display:block;margin-bottom:2px;}
+.stat-num{font-family:var(--serif);font-size:clamp(64px,7vw,96px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;}
+.stat-num-sup{font-size:.4em;vertical-align:super;color:var(--red);}
+.stat-label{font-size:13px;color:var(--ink2);margin-top:14px;line-height:1.55;max-width:180px;}
+.stat-label strong{color:var(--ink);font-weight:500;display:block;margin-bottom:4px;font-size:14px;}
 
 /* outcomes list */
-.filter-outcomes{margin-top:40px;display:flex;flex-direction:column;gap:10px;}
-.fo-item{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.65;color:var(--muted);}
+.filter-outcomes{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
+.fo-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.65;color:var(--ink2);}
 .fo-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
-.fo-item strong{color:var(--ink2);font-weight:500;}
+.fo-item strong{color:var(--ink);font-weight:500;}
 
 /* ── CMS SECTION ── */
 .section{padding:72px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
@@ -197,7 +197,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .stats{grid-template-columns:1fr 1fr;background:var(--border);gap:1px;}
   .stat:last-child{grid-column:1/-1;border-right:none;}
   .stat{background:var(--bg);border-right:none;}
-  .stat-num{font-size:clamp(44px,10vw,64px);}
+  .stat-num{font-size:clamp(52px,12vw,72px);}
   .section{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
   .section-label{position:static;}
   .cms-grid{grid-template-columns:1fr;}
@@ -312,12 +312,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <p class="stat-label"><strong>Portfolio companies</strong>filterable in real time</p>
     </div>
     <div class="stat">
-      <p class="stat-num">3<span class="stat-num-sup">×</span>1</p>
+      <p class="stat-num">3</p>
       <p class="stat-label"><strong>Filters combined</strong>with live search simultaneously</p>
     </div>
     <div class="stat">
       <p class="stat-num">0</p>
-      <p class="stat-label"><strong>Page reloads</strong>all results update instantly</p>
+      <p class="stat-label"><strong>Page reloads</strong>— instant updates</p>
     </div>
   </div>
 

@@ -21,8 +21,15 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s ease,height .2s ease,opacity .2s ease;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,border-color .25s ease;}
+#cur.is-hover{width:12px;height:12px;}
+#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.45);}
+/* ── disable custom cursor on touch/tablet ── */
+@media(max-width:960px){
+  body{cursor:auto;}
+  #cur,#cur-r{display:none;}
+}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.96);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
@@ -188,7 +195,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:960px){
   nav{padding:16px 20px;}
   .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
-  .hero-right{height:200px;}
+  .hero-right{display:none;}
   .hero-title{font-size:clamp(44px,12vw,80px);}
   .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
   .trio{grid-template-columns:1fr;}
@@ -398,99 +405,137 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 </div>
 
 <script>
-/* ── cursor ── */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-});
-(function loop(){
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(loop);
-})();
+const isTouchDevice = () => window.matchMedia('(max-width:960px)').matches
+  || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
-/* ── scroll reveal ── */
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}
-}),{threshold:.06});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+/* ── cursor (desktop only) ── */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-r');
+let mx=0, my=0, rx=0, ry=0;
+let cursorActive = false;
 
-/* ── network canvas (cursor-reactive) ── */
-const canvas=document.getElementById('networkCanvas');
-const ctx=canvas.getContext('2d');
-let W,H,mouse={x:-999,y:-999};
-const nodes=[];
+if (!isTouchDevice()) {
+  cursorActive = true;
 
-function resize(){
-  const rect=canvas.parentElement.getBoundingClientRect();
-  W=canvas.width=rect.width;
-  H=canvas.height=rect.height||420;
-}
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left  = mx + 'px';
+    cur.style.top   = my + 'px';
+  });
 
-function makeNodes(){
-  nodes.length=0;
-  const n=window.innerWidth<768?8:16;
-  for(let i=0;i<n;i++) nodes.push({
-    x:Math.random()*W, y:Math.random()*H,
-    vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
-    r:Math.random()*2+1.5
+  /* smooth ring follow */
+  (function loop(){
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  /* dot grow on hover over clickable elements */
+  const clickable = 'a,button,[role="button"],label,input,select,textarea,.hero-cta,.nav-back,.next-link,.trio-item,.cms-card,.stat';
+  document.querySelectorAll(clickable).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.classList.add('is-hover');
+      ring.classList.add('is-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.classList.remove('is-hover');
+      ring.classList.remove('is-hover');
+    });
+  });
+  /* also catch dynamically via delegation */
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest('a,button,[role="button"]')) {
+      cur.classList.add('is-hover');
+      ring.classList.add('is-hover');
+    }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('a,button,[role="button"]')) {
+      cur.classList.remove('is-hover');
+      ring.classList.remove('is-hover');
+    }
   });
 }
 
-/* track cursor relative to canvas */
-canvas.parentElement.addEventListener('mousemove',e=>{
-  const r=canvas.getBoundingClientRect();
-  mouse.x=e.clientX-r.left;
-  mouse.y=e.clientY-r.top;
-});
-canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999;});
+/* ── scroll reveal ── */
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+}), {threshold: .06});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<nodes.length;i++){
-    const n=nodes[i];
-    /* react to cursor */
-    const dx=n.x-mouse.x,dy=n.y-mouse.y;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<100){
-      const force=(100-dist)/100;
-      n.vx+=dx/dist*force*.6;
-      n.vy+=dy/dist*force*.6;
-    }
-    /* clamp speed */
-    const speed=Math.sqrt(n.vx*n.vx+n.vy*n.vy);
-    if(speed>1.2){n.vx*=1.2/speed;n.vy*=1.2/speed;}
+/* ── network canvas (desktop only) ── */
+const canvas = document.getElementById('networkCanvas');
+if (canvas && !isTouchDevice()) {
+  const ctx = canvas.getContext('2d');
+  let W, H, mouse = {x:-999, y:-999};
+  const nodes = [];
 
-    /* connect to others */
-    for(let j=i+1;j<nodes.length;j++){
-      const m=nodes[j];
-      const ex=n.x-m.x,ey=n.y-m.y;
-      const ed=Math.sqrt(ex*ex+ey*ey);
-      if(ed<130){
-        ctx.beginPath();
-        ctx.strokeStyle=`rgba(139,32,32,${(1-ed/130)*.15})`;
-        ctx.lineWidth=.5;
-        ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
-        ctx.stroke();
-      }
-    }
-    /* draw node */
-    ctx.beginPath();
-    ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-    ctx.fillStyle=dist<100?`rgba(139,32,32,.5)`:`rgba(139,32,32,.2)`;
-    ctx.fill();
-
-    n.x+=n.vx;n.y+=n.vy;
-    if(n.x<0||n.x>W)n.vx*=-1;
-    if(n.y<0||n.y>H)n.vy*=-1;
+  function resize(){
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = rect.width;
+    H = canvas.height = rect.height || 420;
   }
-  requestAnimationFrame(draw);
-}
 
-window.addEventListener('resize',()=>{resize();makeNodes();});
-resize();makeNodes();draw();
+  function makeNodes(){
+    nodes.length = 0;
+    for (let i=0; i<16; i++) nodes.push({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+      r: Math.random()*2+1.5
+    });
+  }
+
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', () => { mouse.x=-999; mouse.y=-999; });
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for (let i=0; i<nodes.length; i++){
+      const n = nodes[i];
+      const dx=n.x-mouse.x, dy=n.y-mouse.y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < 100){
+        const force = (100-dist)/100;
+        n.vx += dx/dist*force*.6;
+        n.vy += dy/dist*force*.6;
+      }
+      const speed = Math.sqrt(n.vx*n.vx+n.vy*n.vy);
+      if (speed > 1.2){ n.vx *= 1.2/speed; n.vy *= 1.2/speed; }
+      for (let j=i+1; j<nodes.length; j++){
+        const m = nodes[j];
+        const ex=n.x-m.x, ey=n.y-m.y;
+        const ed = Math.sqrt(ex*ex+ey*ey);
+        if (ed < 130){
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(139,32,32,${(1-ed/130)*.15})`;
+          ctx.lineWidth = .5;
+          ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y);
+          ctx.stroke();
+        }
+      }
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = dist<100 ? `rgba(139,32,32,.5)` : `rgba(139,32,32,.2)`;
+      ctx.fill();
+      n.x += n.vx; n.y += n.vy;
+      if (n.x<0||n.x>W) n.vx *= -1;
+      if (n.y<0||n.y>H) n.vy *= -1;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); makeNodes(); });
+  resize(); makeNodes(); draw();
+} else if (canvas) {
+  /* on mobile: hide canvas container cleanly */
+  canvas.parentElement.style.display = 'none';
+}
 </script>
 </body>
 </html>

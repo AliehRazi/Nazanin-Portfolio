@@ -21,8 +21,16 @@
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s ease,height .18s ease;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.22);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s ease,height .22s ease,border-color .22s ease;}
+#cur.is-hover{width:11px;height:11px;}
+#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.42);}
+a,button,[role="button"]{cursor:none;}
+@media(max-width:960px){
+  body{cursor:auto;}
+  a,button,[role="button"]{cursor:auto;}
+  #cur,#cur-r{display:none;}
+}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.96);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
@@ -69,8 +77,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── CHALLENGE / APPROACH / OUTCOME ── */
 .trio{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:.5px solid var(--border);}
-.trio-item{padding:48px;border-right:.5px solid var(--border);transition:background .2s;}
-.trio-item:hover{background:var(--bg2);}
+.trio-item{padding:48px;border-right:.5px solid var(--border);}
+
 .trio-item:last-child{border-right:none;}
 .trio-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
 .trio-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--ink);margin-bottom:12px;}
@@ -124,9 +132,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── STATS ── */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border:.5px solid var(--border);background:#fff;}
-.stat{padding:40px 48px;border-right:.5px solid var(--border);transition:background .2s;}
+.stat{padding:40px 48px;border-right:.5px solid var(--border);}
 .stat:last-child{border-right:none;}
-.stat:hover{background:var(--bg2);}
+
 .stat-num{font-family:var(--serif);font-size:clamp(64px,7vw,96px);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.03em;}
 .stat-num-sup{font-size:.4em;vertical-align:super;color:var(--red);}
 .stat-label{font-size:13px;color:var(--ink2);margin-top:14px;line-height:1.55;max-width:180px;}
@@ -164,16 +172,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cms-screenshot-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
 .cms-screenshot{width:100%;display:block;border-radius:2px;border:.5px solid rgba(0,0,0,.12);box-shadow:0 4px 20px rgba(0,0,0,.1);}
 
-/* ── NEXT PROJECT ── */
-.next{padding:72px 48px;display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:center;border-top:.5px solid var(--border);}
-.next-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
-.next-link-wrap{display:flex;align-items:center;justify-content:space-between;}
-.next-link{font-family:var(--serif);font-size:clamp(32px,4vw,56px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;position:relative;display:inline-block;}
-.next-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:.5px;background:var(--red);transition:width .35s ease;}
-.next-link:hover::after{width:100%;}
-.next-link:hover{color:var(--red);}
-.next-arrow{font-size:28px;color:var(--faint);font-style:normal;transition:transform .3s,color .2s;}
-.next-link-wrap:hover .next-arrow{transform:translate(6px,-6px);color:var(--red);}
+/* ── EXPLORE SECTION ── */
+.explore{padding:72px 48px;display:flex;justify-content:space-between;align-items:flex-start;gap:48px;border-top:.5px solid var(--border);}
+.explore-left{display:flex;flex-direction:column;gap:0;}
+.explore-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:28px;}
+.explore-projects{display:flex;flex-direction:column;gap:0;}
+.explore-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:.5px solid var(--border);text-decoration:none;}
+.explore-item:last-child{border-bottom:.5px solid var(--border);}
+.explore-item-num{font-size:10px;letter-spacing:.14em;color:var(--faint);flex-shrink:0;}
+.explore-item-title{font-family:var(--serif);font-size:clamp(22px,2.8vw,36px);font-weight:300;font-style:italic;color:var(--ink);position:relative;display:inline-block;transition:color .25s;}
+.explore-item-title::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:.5px;background:var(--red);transition:width .3s ease;}
+.explore-item:hover .explore-item-title{color:var(--red);}
+.explore-item:hover .explore-item-title::after{width:100%;}
+.explore-item-arrow{font-size:clamp(14px,1.8vw,20px);color:var(--muted);transition:transform .25s,color .25s;flex-shrink:0;line-height:1;align-self:center;}
+.explore-item:hover .explore-item-arrow{transform:translate(3px,-3px);color:var(--red);}
+/* right: live site — secondary, subtle */
+.explore-right{display:flex;align-items:flex-start;padding-top:2px;flex-shrink:0;}
+.explore-live{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:.5px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s;}
+.explore-live:hover{color:var(--ink);border-bottom-color:var(--ink);}
+.explore-live-arrow{font-size:11px;transition:transform .2s;}
+.explore-live:hover .explore-live-arrow{transform:translate(2px,-2px);}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -188,7 +206,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:960px){
   nav{padding:16px 20px;}
   .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
-  .hero-right{height:200px;}
+  .hero-right{display:none;}
   .hero-title{font-size:clamp(44px,12vw,80px);}
   .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
   .trio{grid-template-columns:1fr;}
@@ -216,8 +234,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .cms-inner{grid-template-columns:1fr;gap:32px;}
   .cms-node{grid-template-columns:1fr;gap:6px;}
   .cms-value{margin-top:20px;}
-  .next{grid-template-columns:1fr;padding:40px 20px;gap:16px;}
-  .next-link{font-size:clamp(28px,8vw,44px);}
+  .explore{padding:40px 20px 36px;flex-direction:column;gap:0;}
+  .explore-left{gap:0;}
+  .explore-label{margin-bottom:20px;}
+  .explore-right{padding-top:24px;border-top:.5px solid var(--border);width:100%;}
+  .explore-item-title{font-size:clamp(20px,6vw,30px);}
+  .explore-item-arrow{font-size:clamp(13px,4vw,17px);}
 }
 @media(max-width:480px){
   .stats{grid-template-columns:1fr;}
@@ -388,109 +410,141 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </div>
 </div>
 
-<!-- ── NEXT PROJECT ── -->
-<div class="next reveal">
-  <p class="next-label">Next Project</p>
-  <div class="next-link-wrap">
-    <a href="persian-tech.html" class="next-link">Persian Tech Network</a>
-    <span class="next-arrow">↗</span>
+<!-- ── EXPLORE ── -->
+<div class="explore reveal">
+
+  <!-- LEFT: other projects (primary) -->
+  <div class="explore-left">
+    <p class="explore-label">Explore more work</p>
+    <div class="explore-projects">
+      <a href="persian-tech.html" class="explore-item">
+        <span class="explore-item-num">02</span>
+        <span class="explore-item-title">Persian Tech Network</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+      <a href="primer.html" class="explore-item">
+        <span class="explore-item-num">03</span>
+        <span class="explore-item-title">Primer</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+    </div>
   </div>
+
+  <!-- RIGHT: live site link (secondary) -->
+  <div class="explore-right">
+    <a href="https://www.yarvc.com" target="_blank" class="explore-live">
+      Visit live site
+      <span class="explore-live-arrow">↗</span>
+    </a>
+  </div>
+
 </div>
 
 <script>
-/* ── cursor ── */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-});
-(function loop(){
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(loop);
+/* ── cursor & hover interaction ── */
+(function(){
+  const isTouch = window.matchMedia('(max-width:960px)').matches
+    || navigator.maxTouchPoints > 0
+    || ('ontouchstart' in window);
+  if (isTouch) return;
+  const dot  = document.getElementById('cur');
+  const ring = document.getElementById('cur-r');
+  if (!dot || !ring) return;
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  (function loop(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  const CLICKABLE = 'a, button, [role="button"], input, select, textarea';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.add('is-hover'); ring.classList.add('is-hover'); }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
+  });
 })();
 
 /* ── scroll reveal ── */
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}
-}),{threshold:.06});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+}), {threshold: .06});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ── network canvas (cursor-reactive) ── */
-const canvas=document.getElementById('networkCanvas');
-const ctx=canvas.getContext('2d');
-let W,H,mouse={x:-999,y:-999};
-const nodes=[];
+/* ── network canvas (desktop only) ── */
+const canvas = document.getElementById('networkCanvas');
+if (canvas && !window.matchMedia('(max-width:960px)').matches && navigator.maxTouchPoints === 0) {
+  const ctx = canvas.getContext('2d');
+  let W, H, mouse = {x:-999, y:-999};
+  const nodes = [];
 
-function resize(){
-  const rect=canvas.parentElement.getBoundingClientRect();
-  W=canvas.width=rect.width;
-  H=canvas.height=rect.height||420;
-}
-
-function makeNodes(){
-  nodes.length=0;
-  const n=window.innerWidth<768?8:16;
-  for(let i=0;i<n;i++) nodes.push({
-    x:Math.random()*W, y:Math.random()*H,
-    vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
-    r:Math.random()*2+1.5
-  });
-}
-
-/* track cursor relative to canvas */
-canvas.parentElement.addEventListener('mousemove',e=>{
-  const r=canvas.getBoundingClientRect();
-  mouse.x=e.clientX-r.left;
-  mouse.y=e.clientY-r.top;
-});
-canvas.parentElement.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999;});
-
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<nodes.length;i++){
-    const n=nodes[i];
-    /* react to cursor */
-    const dx=n.x-mouse.x,dy=n.y-mouse.y;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<100){
-      const force=(100-dist)/100;
-      n.vx+=dx/dist*force*.6;
-      n.vy+=dy/dist*force*.6;
-    }
-    /* clamp speed */
-    const speed=Math.sqrt(n.vx*n.vx+n.vy*n.vy);
-    if(speed>1.2){n.vx*=1.2/speed;n.vy*=1.2/speed;}
-
-    /* connect to others */
-    for(let j=i+1;j<nodes.length;j++){
-      const m=nodes[j];
-      const ex=n.x-m.x,ey=n.y-m.y;
-      const ed=Math.sqrt(ex*ex+ey*ey);
-      if(ed<130){
-        ctx.beginPath();
-        ctx.strokeStyle=`rgba(139,32,32,${(1-ed/130)*.15})`;
-        ctx.lineWidth=.5;
-        ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
-        ctx.stroke();
-      }
-    }
-    /* draw node */
-    ctx.beginPath();
-    ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-    ctx.fillStyle=dist<100?`rgba(139,32,32,.5)`:`rgba(139,32,32,.2)`;
-    ctx.fill();
-
-    n.x+=n.vx;n.y+=n.vy;
-    if(n.x<0||n.x>W)n.vx*=-1;
-    if(n.y<0||n.y>H)n.vy*=-1;
+  function resize(){
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = rect.width;
+    H = canvas.height = rect.height || 420;
   }
-  requestAnimationFrame(draw);
-}
 
-window.addEventListener('resize',()=>{resize();makeNodes();});
-resize();makeNodes();draw();
+  function makeNodes(){
+    nodes.length = 0;
+    for (let i=0; i<16; i++) nodes.push({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+      r: Math.random()*2+1.5
+    });
+  }
+
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', () => { mouse.x=-999; mouse.y=-999; });
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for (let i=0; i<nodes.length; i++){
+      const n = nodes[i];
+      const dx=n.x-mouse.x, dy=n.y-mouse.y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < 100){
+        const force = (100-dist)/100;
+        n.vx += dx/dist*force*.6;
+        n.vy += dy/dist*force*.6;
+      }
+      const speed = Math.sqrt(n.vx*n.vx+n.vy*n.vy);
+      if (speed > 1.2){ n.vx *= 1.2/speed; n.vy *= 1.2/speed; }
+      for (let j=i+1; j<nodes.length; j++){
+        const m = nodes[j];
+        const ex=n.x-m.x, ey=n.y-m.y;
+        const ed = Math.sqrt(ex*ex+ey*ey);
+        if (ed < 130){
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(139,32,32,${(1-ed/130)*.15})`;
+          ctx.lineWidth = .5;
+          ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y);
+          ctx.stroke();
+        }
+      }
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = dist<100 ? `rgba(139,32,32,.5)` : `rgba(139,32,32,.2)`;
+      ctx.fill();
+      n.x += n.vx; n.y += n.vy;
+      if (n.x<0||n.x>W) n.vx *= -1;
+      if (n.y<0||n.y>H) n.vy *= -1;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); makeNodes(); });
+  resize(); makeNodes(); draw();
+} else if (canvas) {
+  canvas.parentElement.style.display = 'none';
+}
 </script>
 </body>
 </html>

@@ -172,16 +172,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .cms-screenshot-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
 .cms-screenshot{width:100%;display:block;border-radius:2px;border:.5px solid rgba(0,0,0,.12);box-shadow:0 4px 20px rgba(0,0,0,.1);}
 
-/* ── NEXT PROJECT ── */
-.next{padding:72px 48px;display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:center;border-top:.5px solid var(--border);}
-.next-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
-.next-link-wrap{display:flex;align-items:center;justify-content:space-between;}
-.next-link{font-family:var(--serif);font-size:clamp(32px,4vw,56px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;position:relative;display:inline-block;}
-.next-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:.5px;background:var(--red);transition:width .35s ease;}
-.next-link:hover::after{width:100%;}
-.next-link:hover{color:var(--red);}
-.next-arrow{font-size:28px;color:var(--faint);font-style:normal;transition:transform .3s,color .2s;}
-.next-link-wrap:hover .next-arrow{transform:translate(6px,-6px);color:var(--red);}
+/* ── EXPLORE SECTION ── */
+.explore{padding:72px 48px;display:flex;justify-content:space-between;align-items:flex-start;gap:48px;border-top:.5px solid var(--border);}
+.explore-left{display:flex;flex-direction:column;gap:0;}
+.explore-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:28px;}
+.explore-projects{display:flex;flex-direction:column;gap:0;}
+.explore-item{display:flex;align-items:baseline;gap:14px;padding:14px 0;border-top:.5px solid var(--border);text-decoration:none;}
+.explore-item:last-child{border-bottom:.5px solid var(--border);}
+.explore-item-num{font-size:10px;letter-spacing:.14em;color:var(--faint);flex-shrink:0;padding-top:2px;}
+.explore-item-title{font-family:var(--serif);font-size:clamp(22px,2.8vw,36px);font-weight:300;font-style:italic;color:var(--ink);position:relative;display:inline-block;transition:color .25s;}
+.explore-item-title::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:.5px;background:var(--red);transition:width .3s ease;}
+.explore-item:hover .explore-item-title{color:var(--red);}
+.explore-item:hover .explore-item-title::after{width:100%;}
+.explore-item-arrow{font-size:13px;color:var(--faint);transition:transform .25s,color .25s;flex-shrink:0;}
+.explore-item:hover .explore-item-arrow{transform:translate(3px,-3px);color:var(--red);}
+/* right: live site — secondary, subtle */
+.explore-right{display:flex;align-items:flex-start;padding-top:2px;flex-shrink:0;}
+.explore-live{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:.5px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s;}
+.explore-live:hover{color:var(--ink);border-bottom-color:var(--ink);}
+.explore-live-arrow{font-size:12px;transition:transform .2s;}
+.explore-live:hover .explore-live-arrow{transform:translate(2px,-2px);}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -224,8 +234,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .cms-inner{grid-template-columns:1fr;gap:32px;}
   .cms-node{grid-template-columns:1fr;gap:6px;}
   .cms-value{margin-top:20px;}
-  .next{grid-template-columns:1fr;padding:40px 20px;gap:16px;}
-  .next-link{font-size:clamp(28px,8vw,44px);}
+  .explore{padding:36px 20px;flex-direction:column;gap:28px;}
+  .explore-right{padding-top:0;}
+  .explore-item-title{font-size:clamp(20px,6vw,30px);}
 }
 @media(max-width:480px){
   .stats{grid-template-columns:1fr;}
@@ -396,13 +407,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   </div>
 </div>
 
-<!-- ── NEXT PROJECT ── -->
-<div class="next reveal">
-  <p class="next-label">Next Project</p>
-  <div class="next-link-wrap">
-    <a href="persian-tech.html" class="next-link">Persian Tech Network</a>
-    <span class="next-arrow">↗</span>
+<!-- ── EXPLORE ── -->
+<div class="explore reveal">
+
+  <!-- LEFT: other projects (primary) -->
+  <div class="explore-left">
+    <p class="explore-label">Explore more work</p>
+    <div class="explore-projects">
+      <a href="persian-tech.html" class="explore-item">
+        <span class="explore-item-num">02</span>
+        <span class="explore-item-title">Persian Tech Network</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+      <a href="primer.html" class="explore-item">
+        <span class="explore-item-num">03</span>
+        <span class="explore-item-title">Primer</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+    </div>
   </div>
+
+  <!-- RIGHT: live site link (secondary) -->
+  <div class="explore-right">
+    <a href="https://www.yarvc.com" target="_blank" class="explore-live">
+      Visit live site
+      <span class="explore-live-arrow">↗</span>
+    </a>
+  </div>
+
 </div>
 
 <script>

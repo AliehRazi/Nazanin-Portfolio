@@ -314,7 +314,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <div class="feature-section reveal">
   <p class="feature-kicker">Key Feature</p>
   <h2 class="feature-headline">One entry.<br><em>Every surface.</em></h2>
-  <p class="feature-intro">Adding a new event isn't just publishing a page — it updates the entire system.<br>From homepage sections to archive grids, speaker profiles, and startup listings, a single entry flows through every surface automatically.</p>
+  <p class="feature-intro">A single CMS entry — one event — updates the homepage, populates the archive, extends speaker profiles, and adds to the startup directory. No templates to touch. No syncing required.</p>
 
   <!-- flow diagram -->
   <div class="flow reveal">
@@ -366,13 +366,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
   </div>
 
-  <!-- outcomes -->
-  <div class="feature-outcomes reveal">
-    <div class="fo-item"><strong>One entry populates multiple surfaces</strong></div>
-    <div class="fo-item"><strong>Relationships drive the UI</strong></div>
-    <div class="fo-item"><strong>No duplication, no manual updates</strong></div>
-    <div class="fo-item"><strong>Fully managed by a non-technical team</strong></div>
-  </div>
 </div>
 
 <!-- ── CMS ARCHITECTURE ── -->
@@ -380,25 +373,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <p class="section-label">CMS Architecture</p>
   <div>
     <h2 class="cms-headline">Four collections.<br><em>One community.</em></h2>
-    <p class="cms-desc">The schema mirrors how the community actually works — events hold the context, speakers and startups carry their own histories, and the flyer archive gives the collection a visual memory. Every relationship is a multi-reference, not a copy.</p>
+    <p class="cms-desc">Events are the central collection — every other collection connects to them. Speakers and Startups are independent profiles referenced by multiple events. Flyers form a separate image archive that auto-populates the archive page. No content is duplicated; everything is referenced.</p>
 
     <div class="cms-inner">
       <div class="cms-nodes">
         <div class="cms-node">
           <p class="cms-node-name">Events</p>
-          <p class="cms-node-desc"><strong>Central collection</strong> — date, flyer, registration link, multi-references to speakers and startups</p>
+          <p class="cms-node-desc"><strong>Central collection.</strong> Holds the date, flyer, registration link, and multi-reference fields to Speakers and Startups</p>
         </div>
         <div class="cms-node">
           <p class="cms-node-name">Speakers</p>
-          <p class="cms-node-desc"><strong>Profile collection</strong> — name, photo, bio, LinkedIn; one speaker, many appearances</p>
+          <p class="cms-node-desc"><strong>Referenced by Events.</strong> One speaker entry — name, photo, LinkedIn — appears across every event they participated in</p>
         </div>
         <div class="cms-node">
           <p class="cms-node-name">Startups</p>
-          <p class="cms-node-desc"><strong>Pitch collection</strong> — founder, LinkedIn, referenced by the event they pitched at</p>
+          <p class="cms-node-desc"><strong>Referenced by Events.</strong> Each startup entry links to the event where it pitched — building a searchable directory over time</p>
         </div>
         <div class="cms-node">
           <p class="cms-node-name">Flyers</p>
-          <p class="cms-node-desc"><strong>Visual archive</strong> — image-led collection, paginated by design, auto-populates the archive page</p>
+          <p class="cms-node-desc"><strong>Separate image collection.</strong> Each flyer is its own entry — auto-populates the archive grid without any manual page updates</p>
         </div>
       </div>
 
@@ -441,7 +434,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
 
     <div class="cms-value">
-      <p class="cms-value-text">A website shaped like the community — not like a content list.</p>
+      <p class="cms-value-text">Add one event. The rest of the site updates itself.</p>
     </div>
   </div>
 </div>
@@ -452,7 +445,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <p class="archive-kicker">Living Archive</p>
     <div>
       <h2 class="archive-heading">Every gathering, <em>preserved.</em></h2>
-      <p class="archive-text">Each monthly flyer joins a paginated CMS archive — an image-led record of the community's trajectory. Every tile deep-links to its event, speakers, and startups, turning the visual history into a navigable one.</p>
+      <p class="archive-text">Each event adds a flyer to a paginated CMS archive — a visual record that grows automatically with the community. What started as a way to document one event is now a browsable history of 29 gatherings, searchable and linked to the speakers and startups behind them.</p>
     </div>
   </div>
   <div class="archive-grid">

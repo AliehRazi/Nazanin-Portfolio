@@ -27,10 +27,14 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
 
 /* ── custom cursor (disabled on touch) ── */
-#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
-@media (hover:none){
+#cur{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s ease,height .18s ease;}
+#cur-r{position:fixed;width:28px;height:28px;border:1px solid rgba(139,32,32,.22);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s ease,height .22s ease,border-color .22s ease;}
+#cur.is-hover{width:11px;height:11px;}
+#cur-r.is-hover{width:36px;height:36px;border-color:rgba(139,32,32,.42);}
+a,button,[role="button"]{cursor:none;}
+@media(max-width:960px){
   body{cursor:auto;}
+  a,button,[role="button"]{cursor:auto;}
   #cur,#cur-r{display:none;}
 }
 
@@ -157,8 +161,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .schema-box-sub{font-family:var(--sans);font-size:9px;fill:var(--faint);}
 .schema-line{stroke:var(--red);stroke-width:.5;fill:none;opacity:.6;}
 .schema-dot{fill:var(--red);}
-.schema-box.central{fill:var(--ink);}
-.schema-box.central+.schema-label-central{fill:#fff;}
 
 /* ── LIVING ARCHIVE ── */
 .archive-section{padding:72px 48px;border-bottom:.5px solid var(--border);}
@@ -197,7 +199,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .reveal-d2{transition-delay:.2s;}
 .reveal-d3{transition-delay:.3s;}
 
-@media (prefers-reduced-motion: reduce){
+@media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
   .reveal{opacity:1;transform:none;}
 }
@@ -206,7 +208,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 @media(max-width:960px){
   nav{padding:16px 20px;}
   .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
-  .hero-right{height:200px;}
+  .hero-right{display:none;}
   .hero-title{font-size:clamp(44px,12vw,80px);}
   .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
   .trio{grid-template-columns:1fr;}
@@ -255,7 +257,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <span class="hero-cat">Webflow · Community · CMS Architecture</span>
     </div>
     <h1 class="hero-title">Persian <em>Tech</em><br>Network</h1>
-    <p class="hero-sub">From recurring events to a living archive, a platform that captures and connects a community over time.</p>
+    <p class="hero-sub">From recurring events to a living archive — a platform that captures and connects a community over time.</p>
     <div class="hero-actions">
       <a href="https://persiantechnetwork.webflow.io" target="_blank" rel="noopener noreferrer" class="hero-cta">Visit Live Site <span class="hero-cta-arrow">↗</span></a>
     </div>
@@ -276,11 +278,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <div class="summary reveal">
   <p class="summary-label">Overview</p>
   <div class="summary-right">
-    <p class="summary-lead">Built the digital home for a monthly Silicon Valley gathering now entering its fourth year — a platform that gets <em>lighter as the archive grows heavier.</em></p>
+    <p class="summary-lead">Four years of monthly gatherings, 8,150+ people, 29 events — and a platform designed to get <em>lighter as the archive grows heavier.</em></p>
     <div class="summary-points">
-      <div class="summary-point"><strong>29 events, 40 speakers, 60 startup pitches</strong> — all surfaced, searchable, and interconnected from a single CMS</div>
-      <div class="summary-point"><strong>8,150+ attendees gathered</strong> across four years of monthly programming in the San Francisco Bay Area</div>
-      <div class="summary-point"><strong>Run by a non-technical team</strong> — a new event, flyer, speaker, and startup takes one entry, not six</div>
+      <div class="summary-point"><strong>29 events, 40 speakers, 60 startups</strong> — each connected to the others, not listed in isolation. The platform surfaces relationships, not just records.</div>
+      <div class="summary-point"><strong>A living archive</strong> — every gathering adds to a growing, searchable record that reflects the community's trajectory over time, not just its latest moment.</div>
+      <div class="summary-point"><strong>One entry, fully managed</strong> — a non-technical team runs the entire cadence. No developer needed. No duplication. No drift between what happened and what's published.</div>
     </div>
   </div>
 </div>
@@ -424,8 +426,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
       <!-- SVG schema diagram -->
       <div class="schema-wrap">
         <p class="schema-label">Relational schema</p>
-        <svg class="schema-diagram" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schema diagram: Events at the center, connected to Speakers, Startups, and Flyers">
-          <!-- connecting lines (drawn first, behind boxes) -->
+        <svg class="schema-diagram" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schema diagram: Events at the center, connected to Speakers, Startups, Flyers, and Archive">
+          <!-- connecting lines -->
           <line class="schema-line" x1="220" y1="170" x2="90" y2="60"/>
           <line class="schema-line" x1="220" y1="170" x2="350" y2="60"/>
           <line class="schema-line" x1="220" y1="170" x2="90" y2="280"/>
@@ -435,28 +437,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
           <circle class="schema-dot" cx="285" cy="115" r="2"/>
           <circle class="schema-dot" cx="155" cy="225" r="2"/>
           <circle class="schema-dot" cx="285" cy="225" r="2"/>
-
-          <!-- Events (central) -->
+          <!-- Events (central, dark) -->
           <rect class="schema-box" x="160" y="140" width="120" height="60" fill="#0c0c0c"/>
           <text x="220" y="168" text-anchor="middle" fill="#fff" class="schema-box-label">Events</text>
           <text x="220" y="184" text-anchor="middle" fill="rgba(255,255,255,0.5)" class="schema-box-sub">central collection</text>
-
-          <!-- Speakers (top-left) -->
+          <!-- Speakers -->
           <rect class="schema-box" x="30" y="30" width="120" height="60"/>
           <text x="90" y="58" text-anchor="middle" class="schema-box-label">Speakers</text>
           <text x="90" y="74" text-anchor="middle" class="schema-box-sub">multi-ref</text>
-
-          <!-- Startups (top-right) -->
+          <!-- Startups -->
           <rect class="schema-box" x="290" y="30" width="120" height="60"/>
           <text x="350" y="58" text-anchor="middle" class="schema-box-label">Startups</text>
           <text x="350" y="74" text-anchor="middle" class="schema-box-sub">multi-ref</text>
-
-          <!-- Flyers (bottom-left) -->
+          <!-- Flyers -->
           <rect class="schema-box" x="30" y="250" width="120" height="60"/>
           <text x="90" y="278" text-anchor="middle" class="schema-box-label">Flyers</text>
           <text x="90" y="294" text-anchor="middle" class="schema-box-sub">image archive</text>
-
-          <!-- Attendance/Context (bottom-right) -->
+          <!-- Archive -->
           <rect class="schema-box" x="290" y="250" width="120" height="60"/>
           <text x="350" y="278" text-anchor="middle" class="schema-box-label">Archive</text>
           <text x="350" y="294" text-anchor="middle" class="schema-box-sub">auto-paginated</text>
@@ -488,15 +485,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     </div>
     <div class="archive-tile archive-ghost">
       <p class="archive-ghost-date">Jul · 2025</p>
-      <div>
-        <div class="archive-ghost-line"></div>
-      </div>
+      <div><div class="archive-ghost-line"></div></div>
     </div>
     <div class="archive-tile archive-ghost">
       <p class="archive-ghost-date">Jun · 2025</p>
-      <div>
-        <div class="archive-ghost-line"></div>
-      </div>
+      <div><div class="archive-ghost-line"></div></div>
     </div>
     <div class="archive-tile archive-ghost">
       <p class="archive-ghost-date">+ 25 more</p>
@@ -516,17 +509,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 </div>
 
 <script>
-/* ── custom cursor ── */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-});
-(function loop(){
-  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(loop);
+/* ── cursor & hover interaction ── */
+(function(){
+  const isTouch = window.matchMedia('(max-width:960px)').matches
+    || navigator.maxTouchPoints > 0
+    || ('ontouchstart' in window);
+  if (isTouch) return;
+  const dot  = document.getElementById('cur');
+  const ring = document.getElementById('cur-r');
+  if (!dot || !ring) return;
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
+  });
+  (function loop(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  const CLICKABLE = 'a, button, [role="button"], input, select, textarea';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.add('is-hover'); ring.classList.add('is-hover'); }
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(CLICKABLE)) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
+  });
 })();
 
 /* ── scroll reveal ── */
@@ -535,124 +543,87 @@ const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
 }),{threshold:.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ── orbital canvas: community gathering around a center ── */
+/* ── orbital canvas ── */
 const canvas=document.getElementById('orbitalCanvas');
-const ctx=canvas.getContext('2d');
-const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let W,H,cx,cy;
-let mouseX=-9999,mouseY=-9999;
-const orbits=[];
-let rafId=null;
-let isVisible=true;
+if (canvas && !window.matchMedia('(max-width:960px)').matches) {
+  const ctx=canvas.getContext('2d');
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W,H,cx,cy;
+  let mouseX=-9999,mouseY=-9999;
+  const orbits=[];
+  let rafId=null,isVisible=true;
 
-function resize(){
-  const rect=canvas.parentElement.getBoundingClientRect();
-  W=canvas.width=rect.width;
-  H=canvas.height=rect.height||420;
-  cx=W/2;cy=H/2;
-}
-
-function makeOrbits(){
-  orbits.length=0;
-  /* three concentric orbit bands */
-  const config=[
-    {radius:Math.min(W,H)*.18, count:5, speed:.0018, r:2.2},
-    {radius:Math.min(W,H)*.30, count:8, speed:.0013, r:1.8},
-    {radius:Math.min(W,H)*.42, count:11, speed:.0009, r:1.4},
-  ];
-  config.forEach(c=>{
-    for(let i=0;i<c.count;i++){
-      orbits.push({
-        radius:c.radius,
-        angle:Math.random()*Math.PI*2,
-        speed:c.speed*(.7+Math.random()*.6)*(Math.random()<.5?1:-1),
-        r:c.r
-      });
-    }
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    W=canvas.width=rect.width;
+    H=canvas.height=rect.height||420;
+    cx=W/2;cy=H/2;
+  }
+  function makeOrbits(){
+    orbits.length=0;
+    const config=[
+      {radius:Math.min(W,H)*.18,count:5,speed:.0018,r:2.2},
+      {radius:Math.min(W,H)*.30,count:8,speed:.0013,r:1.8},
+      {radius:Math.min(W,H)*.42,count:11,speed:.0009,r:1.4},
+    ];
+    config.forEach(c=>{
+      for(let i=0;i<c.count;i++){
+        orbits.push({radius:c.radius,angle:Math.random()*Math.PI*2,
+          speed:c.speed*(.7+Math.random()*.6)*(Math.random()<.5?1:-1),r:c.r});
+      }
+    });
+  }
+  canvas.parentElement.addEventListener('mousemove',e=>{
+    const r=canvas.getBoundingClientRect();
+    mouseX=e.clientX-r.left; mouseY=e.clientY-r.top;
   });
-}
+  canvas.parentElement.addEventListener('mouseleave',()=>{mouseX=-9999;mouseY=-9999;});
+  const heroObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      isVisible=e.isIntersecting;
+      if(isVisible&&!rafId&&!reducedMotion) draw();
+    });
+  },{threshold:0});
+  heroObs.observe(canvas);
 
-canvas.parentElement.addEventListener('mousemove',e=>{
-  const r=canvas.getBoundingClientRect();
-  mouseX=e.clientX-r.left;
-  mouseY=e.clientY-r.top;
-});
-canvas.parentElement.addEventListener('mouseleave',()=>{mouseX=-9999;mouseY=-9999;});
-
-/* pause animation when hero out of viewport */
-const heroObserver=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    isVisible=e.isIntersecting;
-    if(isVisible && !rafId && !reducedMotion) draw();
-  });
-},{threshold:0});
-heroObserver.observe(canvas);
-
-function draw(){
-  if(!isVisible){rafId=null;return;}
-  ctx.clearRect(0,0,W,H);
-
-  /* center drifts subtly toward cursor */
-  const drift=60;
-  const tcx=mouseX>-1000?cx+(mouseX-cx)/W*drift:cx;
-  const tcy=mouseY>-1000?cy+(mouseY-cy)/H*drift:cy;
-
-  /* central node */
-  ctx.beginPath();
-  ctx.arc(tcx,tcy,3,0,Math.PI*2);
-  ctx.fillStyle='rgba(139,32,32,.8)';
-  ctx.fill();
-
-  /* faint orbit rings */
-  const ringRadii=[Math.min(W,H)*.18,Math.min(W,H)*.30,Math.min(W,H)*.42];
-  ringRadii.forEach(r=>{
-    ctx.beginPath();
-    ctx.arc(tcx,tcy,r,0,Math.PI*2);
-    ctx.strokeStyle='rgba(139,32,32,.06)';
-    ctx.lineWidth=.5;
-    ctx.stroke();
-  });
-
-  /* orbital dots */
-  const points=[];
-  orbits.forEach(o=>{
-    o.angle+=o.speed;
-    const x=tcx+Math.cos(o.angle)*o.radius;
-    const y=tcy+Math.sin(o.angle)*o.radius;
-    points.push({x,y,r:o.r});
-  });
-
-  /* connect nearby dots */
-  for(let i=0;i<points.length;i++){
-    for(let j=i+1;j<points.length;j++){
-      const dx=points[i].x-points[j].x, dy=points[i].y-points[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<70){
-        ctx.beginPath();
-        ctx.strokeStyle=`rgba(139,32,32,${(1-d/70)*.12})`;
-        ctx.lineWidth=.5;
-        ctx.moveTo(points[i].x,points[i].y);
-        ctx.lineTo(points[j].x,points[j].y);
-        ctx.stroke();
+  function draw(){
+    if(!isVisible){rafId=null;return;}
+    ctx.clearRect(0,0,W,H);
+    const drift=60;
+    const tcx=mouseX>-1000?cx+(mouseX-cx)/W*drift:cx;
+    const tcy=mouseY>-1000?cy+(mouseY-cy)/H*drift:cy;
+    ctx.beginPath();ctx.arc(tcx,tcy,3,0,Math.PI*2);
+    ctx.fillStyle='rgba(139,32,32,.8)';ctx.fill();
+    [Math.min(W,H)*.18,Math.min(W,H)*.30,Math.min(W,H)*.42].forEach(r=>{
+      ctx.beginPath();ctx.arc(tcx,tcy,r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(139,32,32,.06)';ctx.lineWidth=.5;ctx.stroke();
+    });
+    const points=[];
+    orbits.forEach(o=>{
+      o.angle+=o.speed;
+      points.push({x:tcx+Math.cos(o.angle)*o.radius,y:tcy+Math.sin(o.angle)*o.radius,r:o.r});
+    });
+    for(let i=0;i<points.length;i++){
+      for(let j=i+1;j<points.length;j++){
+        const dx=points[i].x-points[j].x,dy=points[i].y-points[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<70){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(139,32,32,${(1-d/70)*.12})`;
+          ctx.lineWidth=.5;ctx.moveTo(points[i].x,points[i].y);ctx.lineTo(points[j].x,points[j].y);ctx.stroke();
+        }
       }
     }
+    points.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(139,32,32,.45)';ctx.fill();
+    });
+    rafId=requestAnimationFrame(draw);
   }
-
-  /* draw dots */
-  points.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(139,32,32,.45)';
-    ctx.fill();
-  });
-
-  rafId=requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();makeOrbits();});
+  resize();makeOrbits();
+  if(!reducedMotion) draw();
 }
-
-window.addEventListener('resize',()=>{resize();makeOrbits();});
-resize();
-makeOrbits();
-if(!reducedMotion) draw();
 </script>
 </body>
 </html>

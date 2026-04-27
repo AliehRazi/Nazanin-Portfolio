@@ -106,21 +106,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .feature-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:620px;margin-bottom:44px;}
 
 /* fan-out diagram */
-.fanout{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:36px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.04);}
-.fanout-grid{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:center;}
-.fanout-source{display:flex;flex-direction:column;align-items:center;text-align:center;}
-.fanout-source-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;}
-.fanout-card{border:.5px solid var(--ink);padding:20px 22px;background:var(--bg);border-radius:2px;width:100%;text-align:left;}
-.fanout-card-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
-.fanout-card-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.25;}
-.fanout-card-meta{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--muted);}
-.fanout-card-meta span::before{content:'· ';color:var(--faint);}
-.fanout-arrow-col{display:flex;justify-content:center;align-items:center;font-size:16px;color:var(--faint);}
-.fanout-targets{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.fanout-target{border:.5px solid var(--border);padding:14px 16px;border-radius:2px;background:var(--bg);}
-.fanout-target-name{font-size:11px;font-weight:500;color:var(--ink);letter-spacing:.02em;margin-bottom:4px;}
-.fanout-target-desc{font-size:10px;color:var(--muted);line-height:1.5;}
-.fanout-caption{margin-top:22px;font-size:11px;letter-spacing:.04em;color:var(--faint);text-align:center;font-style:italic;}
+/* flow diagram */
+.flow{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:40px 36px 32px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.04);}
+.flow-source{display:flex;justify-content:center;margin-bottom:0;}
+.flow-source-box{background:var(--ink);color:#fff;padding:16px 32px;border-radius:2px;text-align:center;min-width:200px;}
+.flow-source-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;}
+.flow-source-title{font-size:13px;font-weight:500;color:#fff;letter-spacing:.02em;}
+.flow-arrow{display:flex;justify-content:center;align-items:center;padding:12px 0;color:var(--faint);font-size:18px;line-height:1;}
+.flow-targets{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.flow-target{border:.5px solid var(--border);padding:14px 16px;border-radius:2px;background:var(--bg);}
+.flow-target-name{font-size:11px;font-weight:500;color:var(--ink);letter-spacing:.02em;margin-bottom:3px;}
+.flow-target-desc{font-size:10px;color:var(--muted);line-height:1.5;}
+.flow-caption{margin-top:24px;font-size:11px;letter-spacing:.04em;color:var(--faint);text-align:center;font-style:italic;}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border:.5px solid var(--border);background:#fff;}
@@ -216,11 +213,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .trio-item:last-child{border-bottom:none;}
   .design-block{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
   .feature-section{padding:48px 20px;}
-  .fanout{padding:24px;}
-  .fanout-grid{grid-template-columns:1fr;gap:28px;}
-  .fanout-source{max-width:100%;}
-  .fanout-targets{grid-template-columns:1fr 1fr;}
-  .fanout-arrow-col{transform:rotate(90deg);}
+  .flow{padding:24px;}
+  .flow-targets{grid-template-columns:1fr 1fr;}
   .stats{grid-template-columns:1fr 1fr;background:var(--border);gap:1px;}
   .stat{background:var(--bg);border-right:none;}
   .stat-num{font-size:clamp(44px,11vw,64px);}
@@ -235,7 +229,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .next-link{font-size:clamp(28px,8vw,44px);}
 }
 @media(max-width:480px){
-  .fanout-targets{grid-template-columns:1fr;}
+  .flow-targets{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -292,17 +286,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div class="trio-item reveal">
     <p class="trio-kicker">Challenge</p>
     <h3 class="trio-title">A growing community, a growing maintenance burden</h3>
-    <p class="trio-body">Every month brought a new event, new flyers, new speaker bios, new startup pitches — and no structure tying them together. The operational weight was starting to outpace the community's ability to document itself.</p>
+    <p class="trio-body">Each month brought a new event — along with speakers, startups, and flyers — but no structure connecting them. Content lived in isolated pieces, making it harder to manage, scale, and reflect the community as a whole.</p>
   </div>
   <div class="trio-item reveal reveal-d1">
     <p class="trio-kicker">Approach</p>
     <h3 class="trio-title">Model the community, not the content</h3>
-    <p class="trio-body">Designed a relational CMS before a single pixel: events, speakers, and startups as interconnected collections. The website became a view of the data — not a container for it. Content structure first, visuals second.</p>
+    <p class="trio-body">Instead of designing pages first, the system was built around relationships — events, speakers, and startups as connected collections. The website became a layer on top of structured data, not a container for disconnected content.</p>
   </div>
   <div class="trio-item reveal reveal-d2">
     <p class="trio-kicker">Outcome</p>
     <h3 class="trio-title">An archive that grows itself</h3>
-    <p class="trio-body">One CMS entry per month populates five surfaces. Homepage counters, archive grid, event detail pages, speaker profiles, and startup listings update automatically — with zero duplication, zero syncing, zero code.</p>
+    <p class="trio-body">A single CMS entry per event populates the entire platform — from homepage sections to archive pages and profiles. As new events are added, the system expands automatically, without duplication or manual updates.</p>
   </div>
 </div>
 
@@ -311,8 +305,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <p class="design-label">Design</p>
   <div>
     <h2 class="design-heading">Editorial, not ornamental</h2>
-    <p class="design-text">Typography and spacing carry the hierarchy — the community's character lives in the details, not the decoration.</p>
-    <p class="design-text">Minimal palette, restrained motion, editorial serif. A site built to age well across hundreds of events, not peak in a single season.</p>
+    <p class="design-text">The design stays intentionally minimal — not to stand out, but to support clarity at scale. As the archive grows, typography and spacing carry the hierarchy, ensuring content remains readable and structured over time.</p>
+    <p class="design-text">Rather than adding visual complexity, the focus is on consistency, predictability, and making relationships easy to scan across events, speakers, and startups.</p>
   </div>
 </div>
 
@@ -320,51 +314,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <div class="feature-section reveal">
   <p class="feature-kicker">Key Feature</p>
   <h2 class="feature-headline">One entry.<br><em>Every surface.</em></h2>
-  <p class="feature-intro">Adding a monthly event is a single CMS action. Behind it, the platform fans out automatically — the homepage refreshes, counters increment, archive cards generate, speaker profiles update, and startup listings extend. The non-technical team never touches a template.</p>
+  <p class="feature-intro">Adding a new event isn't just publishing a page — it updates the entire system.<br>From homepage sections to archive grids, speaker profiles, and startup listings, a single entry flows through every surface automatically.</p>
 
-  <!-- fan-out diagram -->
-  <div class="fanout reveal">
-    <div class="fanout-grid">
-      <div class="fanout-source">
-        <p class="fanout-source-label">One CMS Entry</p>
-        <div class="fanout-card">
-          <p class="fanout-card-tag">New Event</p>
-          <p class="fanout-card-title">PTN · Monthly Gathering</p>
-          <div class="fanout-card-meta">
-            <span>Date, flyer, registration</span>
-            <span>Speakers (multi-ref)</span>
-            <span>Startups (multi-ref)</span>
-          </div>
-        </div>
-      </div>
-      <div class="fanout-targets">
-        <div class="fanout-target">
-          <p class="fanout-target-name">Homepage featured card</p>
-          <p class="fanout-target-desc">Latest event appears automatically</p>
-        </div>
-        <div class="fanout-target">
-          <p class="fanout-target-name">Stat counters</p>
-          <p class="fanout-target-desc">Events, speakers, startups all tick up</p>
-        </div>
-        <div class="fanout-target">
-          <p class="fanout-target-name">Archive grid</p>
-          <p class="fanout-target-desc">New flyer joins the paginated archive</p>
-        </div>
-        <div class="fanout-target">
-          <p class="fanout-target-name">Event detail page</p>
-          <p class="fanout-target-desc">Generated from the event template</p>
-        </div>
-        <div class="fanout-target">
-          <p class="fanout-target-name">Speaker profiles</p>
-          <p class="fanout-target-desc">Each speaker's history extends by one</p>
-        </div>
-        <div class="fanout-target">
-          <p class="fanout-target-name">Startup listings</p>
-          <p class="fanout-target-desc">New pitch joins the master directory</p>
-        </div>
+  <!-- flow diagram -->
+  <div class="flow reveal">
+    <div class="flow-source">
+      <div class="flow-source-box">
+        <p class="flow-source-label">One CMS Entry</p>
+        <p class="flow-source-title">Event Entry</p>
       </div>
     </div>
-    <p class="fanout-caption">one entry → six live surfaces, no manual syncing</p>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-targets">
+      <div class="flow-target">
+        <p class="flow-target-name">Homepage</p>
+        <p class="flow-target-desc">Latest event appears automatically</p>
+      </div>
+      <div class="flow-target">
+        <p class="flow-target-name">Archive</p>
+        <p class="flow-target-desc">Flyer joins the paginated archive grid</p>
+      </div>
+      <div class="flow-target">
+        <p class="flow-target-name">Speakers</p>
+        <p class="flow-target-desc">Each speaker's history extends by one</p>
+      </div>
+      <div class="flow-target">
+        <p class="flow-target-name">Startups</p>
+        <p class="flow-target-desc">New pitch joins the master directory</p>
+      </div>
+    </div>
+    <p class="flow-caption">One entry → multiple surfaces. No duplication. No manual syncing.</p>
   </div>
 
   <!-- STATS -->
@@ -389,10 +368,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
   <!-- outcomes -->
   <div class="feature-outcomes reveal">
-    <div class="fo-item"><strong>One entry populates six surfaces</strong> — homepage, counters, archive, event detail, speaker profile, startup listing</div>
-    <div class="fo-item"><strong>Zero manual syncing</strong> between collections — multi-reference fields carry the relationships</div>
-    <div class="fo-item"><strong>Archive scales indefinitely</strong> — the page structure doesn't change at 30 events or 300</div>
-    <div class="fo-item"><strong>Fully managed by a non-technical team</strong> — no developer touch required to run the cadence</div>
+    <div class="fo-item"><strong>One entry populates multiple surfaces</strong></div>
+    <div class="fo-item"><strong>Relationships drive the UI</strong></div>
+    <div class="fo-item"><strong>No duplication, no manual updates</strong></div>
+    <div class="fo-item"><strong>Fully managed by a non-technical team</strong></div>
   </div>
 </div>
 

@@ -4,13 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Primer — Nazanin Razi</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --red:#8B2020;--navy:#1a2e5e;--ink:#0c0c0c;--muted:#7a7a7a;--faint:#c8c8c8;
-  --bg:#fafaf8;--bg2:#f2f0eb;--border:rgba(0,0,0,0.06);
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif;
+  --red:#8B2020;
+  --ink:#0c0c0c;
+  --ink2:#2a2a2a;
+  --muted:#5a5a5a;
+  --faint:#999;
+  --bg:#fafaf8;
+  --bg2:#f2f0eb;
+  --border:rgba(0,0,0,0.08);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
@@ -24,149 +31,327 @@ a,button,[role="button"]{cursor:none;}
   a,button,[role="button"]{cursor:auto;}
   #cur,#cur-r{display:none;}
 }
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.96);backdrop-filter:blur(16px);border-bottom:.5px solid var(--border);}
 .logo{font-family:var(--serif);font-size:16px;color:var(--ink);text-decoration:none;}
 .logo em{font-style:italic;color:var(--red);}
-.nav-back{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.nav-back::before{content:'←';display:inline-block;transition:transform .2s;}
 .nav-back:hover{color:var(--ink);}
-.nav-back::before{content:'←';}
+.nav-back:hover::before{transform:translateX(-4px);}
 
-.proj-hero{padding:160px 48px 72px;border-bottom:.5px solid var(--border);}
-.proj-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:40px;opacity:0;animation:fadeUp .6s ease forwards .1s;}
-.proj-index{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);}
-.proj-meta-sep{width:24px;height:.5px;background:var(--faint);}
-.proj-category{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
-.proj-type-badge{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:.5px solid rgba(139,32,32,.3);padding:4px 10px;margin-left:8px;}
-.proj-hero-title{font-family:var(--serif);font-size:clamp(64px,10vw,140px);font-weight:300;line-height:.88;letter-spacing:-.03em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
-.proj-hero-title em{font-style:italic;color:var(--red);}
-.proj-hero-sub{margin-top:28px;font-family:var(--serif);font-size:clamp(15px,1.6vw,19px);font-style:italic;color:var(--muted);max-width:520px;line-height:1.6;opacity:0;animation:fadeUp .7s ease forwards .4s;}
-.proj-tags-row{margin-top:28px;display:flex;gap:8px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s ease forwards .55s;}
-.proj-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:5px 12px;}
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:48px;border-bottom:.5px solid var(--border);}
+.hero-left{display:flex;flex-direction:column;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:36px;opacity:0;animation:fadeUp .5s ease forwards .1s;}
+.hero-num{font-size:10px;letter-spacing:.2em;color:var(--faint);}
+.hero-line{width:24px;height:.5px;background:var(--border);}
+.hero-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.hero-title{font-family:var(--serif);font-size:clamp(56px,8vw,120px);font-weight:300;line-height:.88;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:fadeUp .9s ease forwards .2s;}
+.hero-title em{font-style:italic;color:var(--red);}
+.hero-badge{display:inline-flex;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);border:.5px solid rgba(139,32,32,.3);padding:4px 10px;margin-top:16px;opacity:0;animation:fadeUp .6s ease forwards .3s;width:fit-content;}
+.hero-sub{margin-top:20px;font-size:15px;line-height:1.65;color:var(--ink2);max-width:420px;opacity:0;animation:fadeUp .7s ease forwards .4s;font-weight:400;}
+.hero-actions{margin-top:32px;opacity:0;animation:fadeUp .6s ease forwards .55s;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--ink);text-decoration:none;padding:14px 26px;transition:background .25s,gap .2s;}
+.hero-cta:hover{background:var(--red);gap:15px;}
+.hero-cta-arrow{font-size:13px;transition:transform .2s;}
+.hero-cta:hover .hero-cta-arrow{transform:translate(3px,-3px);}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeUp .6s ease forwards .7s;}
+.hero-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--border);padding:4px 9px;}
 
-.proj-summary{background:var(--bg2);padding:48px;border-bottom:.5px solid var(--border);}
-.proj-summary-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
-.proj-summary-text{font-family:var(--serif);font-size:clamp(16px,1.7vw,21px);font-weight:300;line-height:1.7;color:var(--ink);max-width:680px;}
+/* hero right — mockup visual */
+.hero-right{position:relative;height:420px;opacity:0;animation:fadeIn 1s ease forwards .6s;display:flex;align-items:center;justify-content:center;}
+.hero-mockup{width:100%;height:100%;object-fit:contain;display:block;}
 
-.proj-section{padding:64px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:180px 1fr;gap:64px;align-items:start;}
-.proj-section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:100px;}
-.proj-section-body{font-size:13px;line-height:1.9;color:var(--muted);}
-.proj-section-body strong{color:var(--ink);font-weight:400;}
-.proj-section-body p+p{margin-top:14px;}
+/* ── SUMMARY (dark) ── */
+.summary{background:var(--ink);padding:56px 48px;display:grid;grid-template-columns:160px 1fr;gap:64px;align-items:start;}
+.summary-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);padding-top:4px;}
+.summary-right{display:flex;flex-direction:column;gap:20px;}
+.summary-lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,26px);font-weight:300;line-height:1.45;color:#fff;}
+.summary-lead em{font-style:italic;color:rgba(255,255,255,.5);}
+.summary-points{display:flex;flex-direction:column;gap:10px;}
+.summary-point{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.5);}
+.summary-point::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
+.summary-point strong{color:rgba(255,255,255,.8);font-weight:400;}
 
-.proj-img-block{margin-top:28px;max-width:560px;}
-.proj-img-block img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);}
-.proj-img-caption{margin-top:9px;font-size:10px;letter-spacing:.08em;color:var(--faint);}
+/* ── TRIO ── */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:.5px solid var(--border);}
+.trio-item{padding:48px;border-right:.5px solid var(--border);}
+.trio-item:last-child{border-right:none;}
+.trio-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.trio-title{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--ink);margin-bottom:12px;}
+.trio-body{font-size:13px;line-height:1.85;color:var(--muted);}
 
-.proj-img-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;max-width:560px;}
-.proj-img-duo img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);}
+/* ── SECTION (label + content) ── */
+.section{padding:72px 48px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.section-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-top:4px;position:sticky;top:80px;}
+.section-body{font-size:14px;line-height:1.85;color:var(--muted);}
+.section-body strong{color:var(--ink2);font-weight:500;}
+.section-body p+p{margin-top:16px;}
+.section-heading{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:300;color:var(--ink);margin-bottom:16px;line-height:1.1;}
+.section-heading em{font-style:italic;color:var(--red);}
 
-.highlight-list{margin-top:16px;display:flex;flex-direction:column;gap:10px;}
-.highlight-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.6;color:var(--muted);}
-.highlight-item::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
-.highlight-item strong{color:var(--ink);font-weight:400;}
+/* images */
+.img-block{margin-top:24px;max-width:600px;}
+.img-block img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);transition:transform .4s ease,box-shadow .4s ease;}
+.img-block img:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.09);}
+.img-caption{margin-top:9px;font-size:10px;letter-spacing:.06em;color:var(--faint);}
 
-.proj-next{padding:48px;display:flex;justify-content:space-between;align-items:center;}
-.proj-next-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
-.proj-next-link{font-family:var(--serif);font-size:clamp(22px,3vw,38px);font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:12px;transition:color .3s;}
-.proj-next-link:hover{color:var(--red);}
-.proj-next-link span{transition:transform .3s;}
-.proj-next-link:hover span{transform:translate(4px,-4px);}
+.img-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;max-width:600px;}
+.img-duo img{width:100%;display:block;border-radius:2px;border:.5px solid var(--border);}
 
-.proj-live-link{display:inline-flex;align-items:center;gap:6px;margin-top:28px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:.5px solid var(--ink);padding-bottom:3px;opacity:0;animation:fadeUp .6s ease forwards .7s;transition:color .2s,border-color .2s;}
-.proj-live-link:hover{color:var(--red);border-color:var(--red);}
+/* feature list */
+.feat-list{margin-top:20px;display:flex;flex-direction:column;gap:12px;}
+.feat-item{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.65;color:var(--muted);}
+.feat-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
+.feat-item strong{color:var(--ink2);font-weight:500;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+/* ── INTERACTIONS SECTION (cream bg, feature highlight) ── */
+.interactions-section{padding:64px 48px 56px;border-bottom:.5px solid var(--border);background:var(--bg2);}
+.int-kicker{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.int-headline{font-family:var(--serif);font-size:clamp(28px,3.5vw,48px);font-weight:300;line-height:1;color:var(--ink);margin-bottom:16px;}
+.int-headline em{font-style:italic;}
+.int-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:560px;margin-bottom:40px;}
+
+/* interaction cards grid */
+.int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px;}
+.int-card{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:24px;transition:box-shadow .2s;}
+.int-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.int-card-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;}
+.int-card-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px;letter-spacing:.02em;}
+.int-card-body{font-size:12px;line-height:1.65;color:var(--muted);}
+
+/* ── EXPLORE ── */
+.explore{padding:72px 48px;display:flex;justify-content:space-between;align-items:flex-start;gap:48px;border-top:.5px solid var(--border);}
+.explore-left{display:flex;flex-direction:column;gap:0;}
+.explore-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:28px;}
+.explore-projects{display:flex;flex-direction:column;gap:0;}
+.explore-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:.5px solid var(--border);text-decoration:none;}
+.explore-item:last-child{border-bottom:.5px solid var(--border);}
+.explore-item-num{font-size:10px;letter-spacing:.14em;color:var(--faint);flex-shrink:0;}
+.explore-item-title{font-family:var(--serif);font-size:clamp(22px,2.8vw,36px);font-weight:300;font-style:italic;color:var(--ink);position:relative;display:inline-block;transition:color .25s;}
+.explore-item-title::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:.5px;background:var(--red);transition:width .3s ease;}
+.explore-item:hover .explore-item-title{color:var(--red);}
+.explore-item:hover .explore-item-title::after{width:100%;}
+.explore-item-arrow{font-size:clamp(14px,1.8vw,20px);color:var(--muted);transition:transform .25s,color .25s;flex-shrink:0;line-height:1;align-self:center;}
+.explore-item:hover .explore-item-arrow{transform:translate(3px,-3px);color:var(--red);}
+.explore-right{display:flex;align-items:flex-start;padding-top:2px;flex-shrink:0;}
+.explore-live{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:.5px solid transparent;padding-bottom:2px;transition:color .2s,border-color .2s;}
+.explore-live:hover{color:var(--ink);border-bottom-color:var(--ink);}
+.explore-live-arrow{font-size:11px;transition:transform .2s;}
+.explore-live:hover .explore-live-arrow{transform:translate(2px,-2px);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.on{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
 
-@media(max-width:800px){
-  nav,.proj-hero,.proj-summary,.proj-section,.proj-next{padding-left:20px;padding-right:20px;}
-  .proj-section{grid-template-columns:1fr;gap:20px;}
-  .proj-section-label{position:static;}
-  .proj-img-block,.proj-img-duo{max-width:100%;}
-  .proj-img-duo{grid-template-columns:1fr;}
+/* ── MOBILE ── */
+@media(max-width:960px){
+  nav{padding:16px 20px;}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:100px 20px 56px;gap:40px;}
+  .hero-right{display:none;}
+  .hero-title{font-size:clamp(44px,12vw,80px);}
+  .summary{grid-template-columns:1fr;padding:40px 20px;gap:20px;}
+  .trio{grid-template-columns:1fr;}
+  .trio-item{border-right:none;border-bottom:.5px solid var(--border);padding:32px 20px;}
+  .trio-item:last-child{border-bottom:none;}
+  .section{grid-template-columns:1fr;padding:40px 20px;gap:12px;}
+  .section-label{position:static;}
+  .img-block{max-width:100%;}
+  .img-duo{max-width:100%;grid-template-columns:1fr 1fr;}
+  .interactions-section{padding:48px 20px;}
+  .int-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .explore{padding:40px 20px 36px;flex-direction:column;gap:0;}
+  .explore-label{margin-bottom:20px;}
+  .explore-right{padding-top:24px;border-top:.5px solid var(--border);width:100%;}
+  .explore-item-title{font-size:clamp(20px,6vw,30px);}
+  .explore-item-arrow{font-size:clamp(13px,4vw,17px);}
+}
+@media(max-width:480px){
+  .int-grid{grid-template-columns:1fr;}
+  .img-duo{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 <div id="cur"></div>
 <div id="cur-r"></div>
+
 <nav>
   <a href="index.html" class="logo">Nazanin <em>Razi</em></a>
   <a href="index.html#work" class="nav-back">All Work</a>
 </nav>
 
-<div class="proj-hero">
-  <div class="proj-meta-row">
-    <span class="proj-index">03</span>
-    <span class="proj-meta-sep"></span>
-    <span class="proj-category">Webflow · UI Design · Front-end</span>
-    <span class="proj-type-badge">Class Project</span>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-num">03</span>
+      <span class="hero-line"></span>
+      <span class="hero-cat">Webflow · UI Design · Front-end</span>
+    </div>
+    <h1 class="hero-title"><em>Primer</em></h1>
+    <span class="hero-badge">Class Project</span>
+    <p class="hero-sub">A fintech SaaS landing page — designed and built from brief to launch as part of a Webflow development course.</p>
+    <div class="hero-actions">
+      <a href="https://primer-df20b5.webflow.io" target="_blank" class="hero-cta">Visit Live Site <span class="hero-cta-arrow">↗</span></a>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Webflow</span>
+      <span class="hero-tag">UI Design</span>
+      <span class="hero-tag">SaaS Layout</span>
+      <span class="hero-tag">Interactions</span>
+      <span class="hero-tag">Pricing Toggle</span>
+      <span class="hero-tag">Responsive</span>
+    </div>
   </div>
-  <h1 class="proj-hero-title"><em>Primer</em></h1>
-  <p class="proj-hero-sub">A fintech SaaS landing page — designed from brief to build as part of a Webflow development course.</p>
-  <div class="proj-tags-row">
-    <span class="proj-tag">Webflow</span>
-    <span class="proj-tag">UI Design</span>
-    <span class="proj-tag">SaaS Layout</span>
-    <span class="proj-tag">Interactions</span>
-    <span class="proj-tag">Pricing Toggle</span>
+  <div class="hero-right">
+    <img class="hero-mockup"
+         src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/699e2632a920591246484b50_12.png"
+         alt="Primer mobile banking app screen"
+         loading="eager">
   </div>
-  <a href="https://primer-df20b5.webflow.io" target="_blank" class="proj-live-link">Visit Live Site ↗</a>
-</div>
+</section>
 
-<div class="proj-summary reveal">
-  <p class="proj-summary-label">Portfolio Summary</p>
-  <p class="proj-summary-text">A class project built to master Webflow's full interaction and layout toolkit — structured as a real fintech product landing page. The brief was simple: build something that converts. The result demonstrates command of SaaS page architecture, Webflow Interactions, responsive layouts, and typographic hierarchy.</p>
-</div>
-
-<div class="proj-section reveal">
-  <p class="proj-section-label">Concept & Brief</p>
-  <div class="proj-section-body">
-    <p>Primer is a <strong>fictional fintech product</strong> — a digital payments and finance app — used as the vehicle for practicing real-world Webflow techniques. The design challenge was to build a landing page that feels production-ready, not like a student exercise.</p>
-    <p>The structure follows a proven SaaS conversion pattern: hero → social proof → features → pricing → CTA — executed with intentional visual restraint.</p>
-    <div class="proj-img-block">
-      <img src="https://screenshots.webflow.com/sites/6876ad128788220a78a9db67/20260402213703_3b2a883f1f70dfe737afb9b97f2b17b5.png" alt="Primer landing page hero">
-      <p class="proj-img-caption">Hero section — floating mobile mockups with strong typographic lead</p>
+<!-- ── SUMMARY ── -->
+<div class="summary reveal">
+  <p class="summary-label">Overview</p>
+  <div class="summary-right">
+    <p class="summary-lead">Built to learn the full Webflow toolkit — by building something <em>that looks and feels production-ready.</em></p>
+    <div class="summary-points">
+      <div class="summary-point"><strong>Primer is a fictional fintech product</strong> — a digital payments and finance app used as the vehicle for mastering real-world Webflow techniques</div>
+      <div class="summary-point"><strong>Full SaaS landing page architecture</strong> — hero, social proof, feature sections, pricing toggle, SDK grid, and word marquees</div>
+      <div class="summary-point"><strong>Demonstrates command of Webflow Interactions</strong> — scroll reveals, toggle states, animated marquees, hover effects, and responsive breakpoints</div>
     </div>
   </div>
 </div>
 
-<div class="proj-section reveal">
-  <p class="proj-section-label">Interactions & Layout</p>
-  <div class="proj-section-body">
-    <p>The page showcases a range of <strong>Webflow-native interactions</strong> that demonstrate front-end thinking beyond static layouts:</p>
-    <div class="highlight-list">
-      <div class="highlight-item"><strong>Pricing toggle</strong> — monthly/yearly switch with animated state changes</div>
-      <div class="highlight-item"><strong>Diagonal word marquees</strong> — multi-directional scrolling text rows using CSS animations</div>
-      <div class="highlight-item"><strong>Feature card grid</strong> — image + text cards with hover interactions</div>
-      <div class="highlight-item"><strong>Mobile app mockup hero</strong> — layered floating UI screenshots with depth</div>
-      <div class="highlight-item"><strong>Section transitions</strong> — smooth scroll-triggered reveals throughout</div>
-    </div>
-    <div class="proj-img-duo">
-      <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d7fef109ea0e7e4c424d_Finance%20%231.avif" alt="Primer feature section">
-      <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d8e23522c334daaef0e1_Finance%20%232.avif" alt="Primer card section">
-    </div>
-    <p class="proj-img-caption" style="margin-top:9px;">Feature sections — mobile mockups with layered card compositions</p>
+<!-- ── CHALLENGE / APPROACH / OUTCOME ── -->
+<div class="trio">
+  <div class="trio-item reveal">
+    <p class="trio-kicker">Brief</p>
+    <h3 class="trio-title">Build something that converts</h3>
+    <p class="trio-body">The course brief was open-ended: design and build a landing page that feels real. Not a template exercise — a page a real product team would ship. The constraint was the tool: Webflow only, no custom code.</p>
+  </div>
+  <div class="trio-item reveal reveal-d1">
+    <p class="trio-kicker">Approach</p>
+    <h3 class="trio-title">Structure first, interactions second</h3>
+    <p class="trio-body">Chose fintech as the domain — high visual standards, clear user intent, recognisable patterns. Designed the page architecture before touching Webflow: hero → proof → features → pricing → CTA. Then built each section with intentional interaction design.</p>
+  </div>
+  <div class="trio-item reveal reveal-d2">
+    <p class="trio-kicker">Outcome</p>
+    <h3 class="trio-title">A page that earns its complexity</h3>
+    <p class="trio-body">Every interaction on the page serves the conversion goal. The pricing toggle, animated marquees, feature card grid, and scroll-triggered reveals are not decorative — they reflect how real SaaS products communicate value across a long-form landing page.</p>
   </div>
 </div>
 
-<div class="proj-section reveal">
-  <p class="proj-section-label">What I Practiced</p>
-  <div class="proj-section-body">
-    <p>This project was specifically used to practice and demonstrate mastery of:</p>
-    <div class="highlight-list">
-      <div class="highlight-item"><strong>Webflow Interactions</strong> — scroll-triggered animations, toggle states, hover effects</div>
-      <div class="highlight-item"><strong>Responsive design</strong> — breakpoints from desktop to mobile without layout breaks</div>
-      <div class="highlight-item"><strong>Typography hierarchy</strong> — headline, subheadline, body, and caption at scale</div>
-      <div class="highlight-item"><strong>Asset optimisation</strong> — .avif and .svg formats for performance</div>
+<!-- ── DESIGN ── -->
+<div class="section reveal">
+  <p class="section-label">Design</p>
+  <div class="section-body">
+    <h2 class="section-heading">Minimal input, <em>maximum clarity</em></h2>
+    <p>The visual direction follows a proven SaaS pattern — light background, strong typography hierarchy, mobile app mockups as the primary visual evidence. The design stays clean so the product does the talking.</p>
+    <p>Floating mobile UI screenshots in the hero create immediate product credibility. Every section below narrows from broad value proposition to specific feature to pricing — a deliberate funnel structure.</p>
+    <div class="img-block">
+      <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d7fef109ea0e7e4c424d_Finance%20%231.avif"
+           alt="Primer feature section — mobile app with onboarding flow" loading="lazy">
+      <p class="img-caption">Feature section — mobile mockup with layered card composition and social proof</p>
     </div>
   </div>
 </div>
 
-<div class="proj-next reveal">
-  <span class="proj-next-label">Back to Start</span>
-  <a href="yar.html" class="proj-next-link">Yar Ventures <span>↗</span></a>
+<!-- ── INTERACTIONS (key feature section) ── -->
+<div class="interactions-section reveal">
+  <p class="int-kicker">Key Feature</p>
+  <h2 class="int-headline">Interactions that <em>earn attention</em></h2>
+  <p class="int-intro">Every animated element serves the layout — not the other way around. Scroll-triggered reveals pace the reading flow. The pricing toggle removes friction at the decision point. Marquees signal scale without claiming it outright.</p>
+
+  <div class="int-grid">
+    <div class="int-card">
+      <p class="int-card-num">01</p>
+      <p class="int-card-title">Pricing toggle</p>
+      <p class="int-card-body">Monthly / yearly switch with animated state transitions — built with Webflow Interactions, no JavaScript</p>
+    </div>
+    <div class="int-card">
+      <p class="int-card-num">02</p>
+      <p class="int-card-title">Scroll reveals</p>
+      <p class="int-card-body">Staggered fade-up triggers on every section — pacing the page so content arrives with intention, not all at once</p>
+    </div>
+    <div class="int-card">
+      <p class="int-card-num">03</p>
+      <p class="int-card-title">Word marquees</p>
+      <p class="int-card-body">Multi-directional scrolling text rows — CSS animation technique communicating brand vocabulary at a glance</p>
+    </div>
+    <div class="int-card">
+      <p class="int-card-num">04</p>
+      <p class="int-card-title">Floating mockup hero</p>
+      <p class="int-card-body">Layered mobile UI screenshots with depth — immediate product proof before a single word is read</p>
+    </div>
+    <div class="int-card">
+      <p class="int-card-num">05</p>
+      <p class="int-card-title">Feature card grid</p>
+      <p class="int-card-body">SDK feature section with image + text cards — hover states and scroll reveals create a browsable, scannable layout</p>
+    </div>
+    <div class="int-card">
+      <p class="int-card-num">06</p>
+      <p class="int-card-title">Responsive breakpoints</p>
+      <p class="int-card-body">Designed across all breakpoints — desktop through mobile — without a single layout break or overflow issue</p>
+    </div>
+  </div>
+
+  <div class="img-duo">
+    <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d8e23522c334daaef0e1_Finance%20%232.avif"
+         alt="Primer wallet card section" loading="lazy">
+    <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d8e2ba7b396691c0caf9_Finance%20%233.avif"
+         alt="Primer balance and transactions section" loading="lazy">
+  </div>
+  <p class="img-caption" style="margin-top:10px;">Feature sections — mobile mockups illustrating wallet, card management, and transaction views</p>
+</div>
+
+<!-- ── WHAT I PRACTICED ── -->
+<div class="section reveal">
+  <p class="section-label">What I Practiced</p>
+  <div class="section-body">
+    <h2 class="section-heading">Webflow from <em>first principles</em></h2>
+    <p>This project was built to demonstrate mastery of the Webflow toolkit — not just the visual output, but the thinking behind structure, performance, and interaction design.</p>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><strong>Webflow Interactions</strong> — scroll-triggered animations, toggle states, hover effects, all without custom code</div>
+      <div class="feat-item"><strong>Responsive layout system</strong> — breakpoints from desktop to mobile without any layout breaks or overflow</div>
+      <div class="feat-item"><strong>Typography hierarchy</strong> — headline, subheadline, body, and caption working together across a long-form page</div>
+      <div class="feat-item"><strong>Asset optimisation</strong> — .avif and .svg formats throughout for performance without visual compromise</div>
+      <div class="feat-item"><strong>SaaS page architecture</strong> — hero → proof → features → pricing → CTA as a deliberate conversion funnel</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EXPLORE ── -->
+<div class="explore reveal">
+  <div class="explore-left">
+    <p class="explore-label">Explore more work</p>
+    <div class="explore-projects">
+      <a href="yar.html" class="explore-item">
+        <span class="explore-item-num">01</span>
+        <span class="explore-item-title">Yar Ventures</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+      <a href="persian-tech.html" class="explore-item">
+        <span class="explore-item-num">02</span>
+        <span class="explore-item-title">Persian Tech Network</span>
+        <span class="explore-item-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+  <div class="explore-right">
+    <a href="https://primer-df20b5.webflow.io" target="_blank" class="explore-live">
+      Visit live site
+      <span class="explore-live-arrow">↗</span>
+    </a>
+  </div>
 </div>
 
 <script>
@@ -182,7 +367,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:fl
   let mx=0, my=0, rx=0, ry=0;
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
   });
   (function loop(){
     rx += (mx-rx)*.12; ry += (my-ry)*.12;
@@ -197,8 +382,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:fl
     if (e.target.closest(CLICKABLE)) { dot.classList.remove('is-hover'); ring.classList.remove('is-hover'); }
   });
 })();
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}}),{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── scroll reveal ── */
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+}), {threshold: .06});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

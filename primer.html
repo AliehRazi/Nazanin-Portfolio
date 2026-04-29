@@ -107,6 +107,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .feat-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:7px;flex-shrink:0;}
 .feat-item strong{color:var(--ink2);font-weight:500;}
 
+/* ── PRICING DEMO GIF ── */
+.pricing-demo-wrap{margin-bottom:36px;display:flex;flex-direction:column;align-items:center;}
+.pricing-demo-gif{width:100%;max-width:900px;display:block;border-radius:3px;border:.5px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.05);}
+
 /* ── INTERACTIONS SECTION (cream bg, feature highlight) ── */
 .interactions-section{padding:64px 48px 56px;border-bottom:.5px solid var(--border);background:var(--bg2);}
 .int-kicker{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
@@ -255,13 +259,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <p class="section-label">Design</p>
   <div class="section-body">
     <h2 class="section-heading">Minimal input, <em>maximum clarity</em></h2>
-    <p>The visual direction follows a proven SaaS pattern — light background, strong typography hierarchy, mobile app mockups as the primary visual evidence. The design stays clean so the product does the talking.</p>
-    <p>Floating mobile UI screenshots in the hero create immediate product credibility. Every section below narrows from broad value proposition to specific feature to pricing — a deliberate funnel structure.</p>
-    <div class="img-block">
-      <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d7fef109ea0e7e4c424d_Finance%20%231.avif"
-           alt="Primer feature section — mobile app with onboarding flow" loading="lazy">
-      <p class="img-caption">Feature section — mobile mockup with layered card composition and social proof</p>
-    </div>
+    <p>The visual direction is intentionally restrained — a light interface, strong typographic hierarchy, and product UI used as the primary visual proof.</p>
+    <p>Instead of relying on decoration, the design focuses on structure. Each section moves from broad value to specific features and pricing, guiding the user through a deliberate long-form flow.</p>
+
   </div>
 </div>
 
@@ -271,46 +271,47 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <h2 class="int-headline">Interactions that <em>earn attention</em></h2>
   <p class="int-intro">Every animated element serves the layout — not the other way around. Scroll-triggered reveals pace the reading flow. The pricing toggle removes friction at the decision point. Marquees signal scale without claiming it outright.</p>
 
+  <!-- PRICING DEMO GIF -->
+  <div class="pricing-demo-wrap reveal">
+    <img src="primer-pricing-demo.gif"
+         alt="Primer pricing toggle demo — switching between Monthly and Yearly, prices update instantly"
+         class="pricing-demo-gif"
+         loading="lazy">
+  </div>
+
   <div class="int-grid">
     <div class="int-card">
       <p class="int-card-num">01</p>
       <p class="int-card-title">Pricing toggle</p>
-      <p class="int-card-body">Monthly / yearly switch with animated state transitions — built with Webflow Interactions, no JavaScript</p>
+      <p class="int-card-body">Switches between monthly and yearly plans with animated state transitions — reducing friction at the decision point without requiring a page reload.</p>
     </div>
     <div class="int-card">
       <p class="int-card-num">02</p>
       <p class="int-card-title">Scroll reveals</p>
-      <p class="int-card-body">Staggered fade-up triggers on every section — pacing the page so content arrives with intention, not all at once</p>
+      <p class="int-card-body">Staggered content reveals control pacing across the page — preventing information overload in a long-form layout.</p>
     </div>
     <div class="int-card">
       <p class="int-card-num">03</p>
       <p class="int-card-title">Word marquees</p>
-      <p class="int-card-body">Multi-directional scrolling text rows — CSS animation technique communicating brand vocabulary at a glance</p>
+      <p class="int-card-body">Subtle, multi-directional motion used to reinforce key terms and create rhythm without distracting from the content.</p>
     </div>
     <div class="int-card">
       <p class="int-card-num">04</p>
       <p class="int-card-title">Floating mockup hero</p>
-      <p class="int-card-body">Layered mobile UI screenshots with depth — immediate product proof before a single word is read</p>
+      <p class="int-card-body">Layered mobile UI with depth and slight motion — establishing product credibility before a single word is read.</p>
     </div>
     <div class="int-card">
       <p class="int-card-num">05</p>
       <p class="int-card-title">Feature card grid</p>
-      <p class="int-card-body">SDK feature section with image + text cards — hover states and scroll reveals create a browsable, scannable layout</p>
+      <p class="int-card-body">Hover and scroll-based interactions turn static content into a browsable system — improving scanability.</p>
     </div>
     <div class="int-card">
       <p class="int-card-num">06</p>
       <p class="int-card-title">Responsive breakpoints</p>
-      <p class="int-card-body">Designed across all breakpoints — desktop through mobile — without a single layout break or overflow issue</p>
+      <p class="int-card-body">Interactions adapt across screen sizes — maintaining clarity and consistency without layout breaks.</p>
     </div>
   </div>
 
-  <div class="img-duo">
-    <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d8e23522c334daaef0e1_Finance%20%232.avif"
-         alt="Primer wallet card section" loading="lazy">
-    <img src="https://cdn.prod.website-files.com/6876ad128788220a78a9db67/68c1d8e2ba7b396691c0caf9_Finance%20%233.avif"
-         alt="Primer balance and transactions section" loading="lazy">
-  </div>
-  <p class="img-caption" style="margin-top:10px;">Feature sections — mobile mockups illustrating wallet, card management, and transaction views</p>
 </div>
 
 <!-- ── WHAT I PRACTICED ── -->

@@ -114,24 +114,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 .int-headline em{font-style:italic;}
 .int-intro{font-size:14px;line-height:1.75;color:var(--muted);max-width:560px;margin-bottom:44px;}
 
-/* ── PRICING DEMO (primary visual) ── */
-.pricing-demo-wrap{margin-bottom:40px;display:flex;flex-direction:column;align-items:flex-start;}
-.pricing-demo-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;}
-.pricing-demo-gif{width:100%;max-width:960px;display:block;border-radius:3px;border:.5px solid var(--border);box-shadow:0 10px 48px rgba(0,0,0,.13),0 2px 8px rgba(0,0,0,.06);}
+/* ── PRICING DEMO (primary visual, balanced) ── */
+.pricing-demo-wrap{margin-bottom:28px;display:flex;flex-direction:column;align-items:flex-start;}
+.pricing-demo-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
+.pricing-demo-gif{width:100%;max-width:720px;display:block;border-radius:3px;border:.5px solid var(--border);box-shadow:0 8px 28px rgba(0,0,0,.08);}
 
 /* ── FEATURED card (Pricing toggle) ── */
-.int-featured{background:#fff;border:.5px solid var(--ink);border-radius:2px;padding:28px 32px;margin-bottom:12px;max-width:960px;}
-.int-featured-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.int-featured-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:8px;letter-spacing:.01em;}
-.int-featured-body{font-size:13px;line-height:1.7;color:var(--muted);max-width:640px;}
+.int-featured{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:22px 26px;margin-bottom:18px;max-width:720px;}
+.int-featured-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.int-featured-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:7px;letter-spacing:.01em;}
+.int-featured-body{font-size:13px;line-height:1.7;color:var(--muted);max-width:620px;}
 
 /* ── SECONDARY cards ── */
-.int-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:960px;}
-.int-card{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:20px;transition:box-shadow .2s;}
+.int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:960px;}
+.int-card{background:#fff;border:.5px solid var(--border);border-radius:2px;padding:22px;min-height:150px;transition:box-shadow .2s;}
 .int-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);}
 .int-card-num{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
-.int-card-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:5px;letter-spacing:.01em;}
-.int-card-body{font-size:11px;line-height:1.6;color:var(--muted);}
+.int-card-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:7px;letter-spacing:.01em;}
+.int-card-body{font-size:12px;line-height:1.65;color:var(--muted);}
 
 /* ── EXPLORE ── */
 .explore{padding:72px 48px;display:flex;justify-content:space-between;align-items:flex-start;gap:48px;border-top:.5px solid var(--border);}
@@ -176,9 +176,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .img-block{max-width:100%;}
   .img-duo{max-width:100%;grid-template-columns:1fr 1fr;}
   .interactions-section{padding:48px 20px;}
-  .int-featured{padding:20px;}
-  .int-grid{grid-template-columns:1fr 1fr;max-width:100%;}
-  .int-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .pricing-demo-gif{max-width:100%;}
+  .int-featured{padding:20px;max-width:100%;}
+  .int-grid{grid-template-columns:1fr 1fr;max-width:100%;gap:10px;}
   .explore{padding:40px 20px 36px;flex-direction:column;gap:0;}
   .explore-label{margin-bottom:20px;}
   .explore-right{padding-top:24px;border-top:.5px solid var(--border);width:100%;}
@@ -278,7 +278,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 <div class="interactions-section reveal">
   <p class="int-kicker">Key Feature</p>
   <h2 class="int-headline">Interactions that <em>earn attention</em></h2>
-  <p class="int-intro">Every animated element serves the layout — not the other way around. The pricing toggle removes friction at the decision point. Scroll reveals pace the reading flow. Motion signals without demanding it.</p>
+  <p class="int-intro">Every animated element serves the layout — not the other way around. The pricing toggle reduces friction at the decision point, while scroll reveals pace the reading flow. Motion is used to guide attention, not decorate.</p>
 
   <!-- PRIMARY: Pricing demo GIF -->
   <div class="pricing-demo-wrap reveal">
@@ -293,7 +293,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   <div class="int-featured reveal">
     <p class="int-featured-label">01 — Primary interaction</p>
     <p class="int-featured-title">Pricing toggle</p>
-    <p class="int-featured-body">Switches between monthly and yearly plans with animated state transitions — reducing friction at the decision point without requiring a page reload.</p>
+    <p class="int-featured-body">Switches between monthly and yearly plans with smooth state transitions — allowing quick comparison without interrupting the decision flow.</p>
   </div>
 
   <!-- SECONDARY cards: remaining 5 interactions -->

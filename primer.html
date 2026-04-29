@@ -109,7 +109,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
 
 /* ── INTERACTIONS SECTION ── */
 .interactions-section{
-  padding:72px 48px 64px;
+  padding:80px 48px 72px;
   border-bottom:.5px solid var(--border);
   background:var(--bg2);
 }
@@ -138,102 +138,72 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   line-height:1.75;
   color:var(--muted);
   max-width:620px;
-  margin-bottom:34px;
+  margin-bottom:44px;
 }
 
-/* Featured interaction: demo + explanation */
-.int-showcase{
+/* Editorial interaction layout — no cards */
+.int-editorial{
   display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
-  gap:28px;
-  align-items:stretch;
-  margin-bottom:22px;
+  grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);
+  gap:88px;
+  align-items:start;
 }
-.pricing-demo-wrap{
-  background:#fff;
-  border:.5px solid var(--border);
-  border-radius:2px;
-  padding:22px;
-  box-shadow:0 8px 28px rgba(0,0,0,.06);
+.int-list{
+  border-top:.5px solid var(--border);
+}
+.int-row{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:36px;
+  padding:24px 0;
+  border-bottom:.5px solid var(--border);
+}
+.int-row-meta{
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+.int-row-title{
+  font-size:14px;
+  font-weight:500;
+  color:var(--ink);
+  margin-bottom:7px;
+}
+.int-row-body{
+  font-size:13px;
+  line-height:1.75;
+  color:var(--muted);
+}
+.int-row-body strong{
+  color:var(--ink2);
+  font-weight:500;
+}
+
+.int-proof{
+  position:sticky;
+  top:104px;
 }
 .pricing-demo-label{
   font-size:9px;
   letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--faint);
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 .pricing-demo-gif{
   width:100%;
   display:block;
   border-radius:2px;
-  border:.5px solid rgba(0,0,0,.06);
-}
-.int-featured{
-  background:#fff;
   border:.5px solid var(--border);
-  border-radius:2px;
-  padding:26px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  box-shadow:0 16px 42px rgba(0,0,0,.08);
 }
-.int-featured-label{
-  font-size:9px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--red);
-  margin-bottom:14px;
-}
-.int-featured-title{
-  font-size:16px;
-  font-weight:500;
-  color:var(--ink);
-  margin-bottom:10px;
-  letter-spacing:.01em;
-}
-.int-featured-body{
-  font-size:13px;
-  line-height:1.75;
-  color:var(--muted);
-}
-
-/* Secondary cards */
-.int-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.int-card{
-  background:#fff;
-  border:.5px solid var(--border);
-  border-radius:2px;
-  padding:22px;
-  min-height:132px;
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.int-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,.055);
-}
-.int-card-num{
-  font-size:9px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
+.int-proof-caption{
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:.06em;
   color:var(--faint);
-  margin-bottom:12px;
-}
-.int-card-title{
-  font-size:13px;
-  font-weight:500;
-  color:var(--ink);
-  margin-bottom:7px;
-  letter-spacing:.01em;
-}
-.int-card-body{
-  font-size:12px;
-  line-height:1.65;
-  color:var(--muted);
+  line-height:1.6;
 }
 
 /* ── EXPLORE ── */
@@ -280,10 +250,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
   .img-duo{max-width:100%;grid-template-columns:1fr 1fr;}
   .interactions-section{padding:48px 20px;}
   .int-inner{max-width:100%;}
-  .int-showcase{grid-template-columns:1fr;gap:14px;}
-  .pricing-demo-wrap{padding:16px;}
-  .int-featured{padding:20px;}
-  .int-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .int-editorial{grid-template-columns:1fr;gap:32px;}
+  .int-proof{position:static;order:-1;}
+  .int-row{grid-template-columns:1fr;gap:8px;padding:22px 0;}
   .explore{padding:40px 20px 36px;flex-direction:column;gap:0;}
   .explore-label{margin-bottom:20px;}
   .explore-right{padding-top:24px;border-top:.5px solid var(--border);width:100%;}
@@ -386,47 +355,64 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:fl
     <h2 class="int-headline">Interactions that <em>earn attention</em></h2>
     <p class="int-intro">Every animated element serves the layout — not the other way around. The pricing toggle reduces friction at the decision point, while scroll reveals pace the reading flow. Motion is used to guide attention, not decorate.</p>
 
-    <div class="int-showcase">
-      <div class="pricing-demo-wrap reveal">
+    <div class="int-editorial">
+      <div class="int-list reveal">
+        <div class="int-row">
+          <p class="int-row-meta">01 / Primary</p>
+          <div>
+            <p class="int-row-title">Pricing toggle</p>
+            <p class="int-row-body">Switches between monthly and yearly plans with smooth state transitions — allowing quick comparison without interrupting the decision flow.</p>
+          </div>
+        </div>
+
+        <div class="int-row">
+          <p class="int-row-meta">02 / Scroll</p>
+          <div>
+            <p class="int-row-title">Scroll reveals</p>
+            <p class="int-row-body">Staggered content reveals control pacing across the page — preventing information overload in a long-form layout.</p>
+          </div>
+        </div>
+
+        <div class="int-row">
+          <p class="int-row-meta">03 / Motion</p>
+          <div>
+            <p class="int-row-title">Word marquees</p>
+            <p class="int-row-body">Subtle, multi-directional motion reinforces key terms and creates rhythm without distracting from the content.</p>
+          </div>
+        </div>
+
+        <div class="int-row">
+          <p class="int-row-meta">04 / Proof</p>
+          <div>
+            <p class="int-row-title">Floating mockup hero</p>
+            <p class="int-row-body">Layered mobile UI with depth and slight motion establishes product credibility before a single word is read.</p>
+          </div>
+        </div>
+
+        <div class="int-row">
+          <p class="int-row-meta">05 / System</p>
+          <div>
+            <p class="int-row-title">Feature card grid</p>
+            <p class="int-row-body">Hover and scroll-based interactions turn static content into a browsable, scannable system.</p>
+          </div>
+        </div>
+
+        <div class="int-row">
+          <p class="int-row-meta">06 / Responsive</p>
+          <div>
+            <p class="int-row-title">Responsive breakpoints</p>
+            <p class="int-row-body">Interactions adapt across screen sizes — maintaining clarity and consistency without layout breaks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="int-proof reveal reveal-d1">
         <p class="pricing-demo-label">Pricing toggle interaction</p>
         <img src="primer-pricing-demo.gif"
              alt="Primer pricing toggle demo — switching between Monthly and Yearly, prices update instantly"
              class="pricing-demo-gif"
              loading="lazy">
-      </div>
-
-      <div class="int-featured reveal">
-        <p class="int-featured-label">01 — Primary interaction</p>
-        <p class="int-featured-title">Pricing toggle</p>
-        <p class="int-featured-body">Switches between monthly and yearly plans with smooth state transitions — allowing quick comparison without interrupting the decision flow.</p>
-      </div>
-    </div>
-
-    <div class="int-grid reveal">
-      <div class="int-card">
-        <p class="int-card-num">02</p>
-        <p class="int-card-title">Scroll reveals</p>
-        <p class="int-card-body">Staggered content reveals control pacing across the page — preventing information overload in a long-form layout.</p>
-      </div>
-      <div class="int-card">
-        <p class="int-card-num">03</p>
-        <p class="int-card-title">Word marquees</p>
-        <p class="int-card-body">Subtle, multi-directional motion reinforces key terms and creates rhythm without distracting from the content.</p>
-      </div>
-      <div class="int-card">
-        <p class="int-card-num">04</p>
-        <p class="int-card-title">Floating mockup hero</p>
-        <p class="int-card-body">Layered mobile UI with depth and slight motion establishes product credibility before a single word is read.</p>
-      </div>
-      <div class="int-card">
-        <p class="int-card-num">05</p>
-        <p class="int-card-title">Feature card grid</p>
-        <p class="int-card-body">Hover and scroll-based interactions turn static content into a browsable, scannable system.</p>
-      </div>
-      <div class="int-card">
-        <p class="int-card-num">06</p>
-        <p class="int-card-title">Responsive breakpoints</p>
-        <p class="int-card-body">Interactions adapt across screen sizes — maintaining clarity and consistency without layout breaks.</p>
+        <p class="int-proof-caption">A focused demo of the primary decision-point interaction.</p>
       </div>
     </div>
   </div>

@@ -118,12 +118,14 @@ nav.scrolled{border-bottom-color:var(--border);}
 .about-text{font-size:14px;line-height:1.95;color:var(--muted);}
 .about-text p+p{margin-top:16px;}
 .skills-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;}
-.skill-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:.5px solid var(--border);}
+.skill-row{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:18px 0;border-bottom:.5px solid var(--border);}
 .skill-row:first-of-type{border-top:.5px solid var(--border);}
-.skill-name-wrap{display:flex;align-items:center;gap:10px;}
-.skill-dot{width:3px;height:3px;border-radius:50%;background:var(--red);}
+.skill-name-wrap{display:flex;align-items:flex-start;gap:10px;}
+.skill-dot{width:3px;height:3px;border-radius:50%;background:var(--red);margin-top:8px;flex-shrink:0;}
+.skill-copy{display:flex;flex-direction:column;gap:6px;}
 .skill-name{font-size:13px;color:var(--ink);}
-.skill-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);}
+.skill-desc{font-size:12px;line-height:1.65;color:var(--muted);max-width:430px;}
+.skill-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding-top:2px;opacity:.55;}
 
 /* CONTACT */
 #contact{padding:120px 48px;background:var(--ink);position:relative;overflow:hidden;min-height:60vh;display:flex;flex-direction:column;justify-content:center;}
@@ -153,6 +155,8 @@ footer span{font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.06em;}
   .project-row{grid-template-columns:40px 1fr 32px;gap:16px;}
   .proj-right{display:none;}
   #about{grid-template-columns:1fr;gap:48px;}
+  .skill-row{grid-template-columns:1fr;gap:8px;}
+  .skill-tag{display:none;}
   .hero-meta-row{flex-direction:column;gap:16px;}
   .hero-sep{display:none;}
 }
@@ -266,18 +270,79 @@ footer span{font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.06em;}
     <h2 class="about-headline">Every element<br>should <em>earn</em><br>its place.</h2>
     <div class="about-divider"></div>
     <div class="about-text">
-      <p>I'm Nazanin — a web designer and front-end developer based in California. I work at the intersection of aesthetics and function, building websites that are both beautiful and genuinely useful.</p>
-      <p>My process is rooted in restraint. I believe good design disappears — leaving only the experience.</p>
+      <p>I’m Nazanin — a web designer and front-end developer based in California, focused on structure, interaction, and clarity.</p>
+      <p>I design and build websites that guide users through content, using motion and layout to support decisions — not distract from them.</p>
+      <p>Good design is quiet. It removes friction, simplifies complexity, and leaves only what matters.</p>
     </div>
   </div>
   <div class="reveal" style="transition-delay:.15s;">
     <p class="skills-title">Skills & Tools</p>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">Webflow Development</span></div><span class="skill-tag">Expert</span></div>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">UI / UX Design</span></div><span class="skill-tag">Expert</span></div>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">Front-end Development</span></div><span class="skill-tag">Advanced</span></div>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">Interaction Design</span></div><span class="skill-tag">Advanced</span></div>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">Typography & Layout</span></div><span class="skill-tag">Expert</span></div>
-    <div class="skill-row"><div class="skill-name-wrap"><span class="skill-dot"></span><span class="skill-name">CMS Architecture</span></div><span class="skill-tag">Advanced</span></div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">Webflow Development</span>
+          <span class="skill-desc">Building structured, responsive layouts with clean class systems and scalable CMS architecture.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Expert</span>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">UI / UX Design</span>
+          <span class="skill-desc">Designing interfaces that prioritize clarity, hierarchy, and ease of use.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Expert</span>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">Front-end Development</span>
+          <span class="skill-desc">Translating design into precise, responsive implementations.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Advanced</span>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">Interaction Design</span>
+          <span class="skill-desc">Using motion and state changes to guide attention and support user decisions.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Advanced</span>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">Typography & Layout</span>
+          <span class="skill-desc">Creating rhythm, hierarchy, and readability across long-form pages.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Expert</span>
+    </div>
+
+    <div class="skill-row">
+      <div class="skill-name-wrap">
+        <span class="skill-dot"></span>
+        <div class="skill-copy">
+          <span class="skill-name">CMS Architecture</span>
+          <span class="skill-desc">Designing structured content systems for scalable filtering and dynamic content.</span>
+        </div>
+      </div>
+      <span class="skill-tag">Advanced</span>
+    </div>
   </div>
 </section>
 

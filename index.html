@@ -144,10 +144,9 @@ footer{background:var(--ink);border-top:.5px solid rgba(255,255,255,.05);padding
 footer span{font-size:10px;color:rgba(255,255,255,.15);letter-spacing:.06em;}
 
 
-@keyframes heroSoft{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-@keyframes scrollPulse{0%,100%{transform:translateY(0);opacity:.42}50%{transform:translateY(4px);opacity:.18}}
+@keyframes scrollPulse{0%,100%{height:36px;opacity:.5}50%{height:12px;opacity:.15}}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
 .reveal.on{opacity:1;transform:translateY(0);}
